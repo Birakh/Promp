@@ -7,45 +7,45 @@
     "use_when": "Use when you need one polished hero image with commercial clarity and material realism.",
     "do_not_use_when": "Do not use when you want messy collage energy or broad ideation.",
     "best_model": "Gemini",
-    "model_fit_note": "Gemini performs best here because richer spatial and sensory phrasing tends to improve image ideation quality.",
+    "model_fit_note": "Gemini performs best here because richer spatial and sensory phrasing improves image ideation quality.",
     "quality_score": 18,
     "viral_score": 18,
     "proof_note": "The shot gets stronger when the prompt controls hierarchy, light, texture, and exclusions.",
-    "common_failure": "The image looks generic and expensive in wording only.",
+    "common_failure": "The image looks generic.",
     "failure_why": "The prompt names the object but never controls the shot.",
     "quick_patch": "Add one contrast pair, one lens, one texture emphasis, and one exclusion list.",
-    "rare_insight": "Luxury-looking output usually comes from subtraction. If you ask for multiple winning ideas in one frame, the image gets cheaper.",
+    "rare_insight": "Luxury-looking output usually comes from subtraction.",
     "compare": {
       "weak": "Make a cool luxury ad for a perfume bottle.",
       "improved": "Create one premium ad shot for a matte black perfume bottle on wet basalt, minimal luxury fused with raw cinematic imperfection, hard flash plus amber rim light, macro lens, controlled reflections, dense condensation, charcoal / silver / amber palette, clean silhouette, negative space for copy, avoid clutter and stock-photo feel.",
       "why_better": [
         "Defines the shot, not just the object",
-        "Adds visual tension instead of vague adjectives",
-        "Prevents obvious AI-image failure modes"
+        "Adds visual tension",
+        "Prevents obvious AI-image failures"
       ]
     },
     "example": {
       "input": "Product: Nocturne fragrance bottle, matte black glass, mysterious + elite mood.",
-      "output": "Macro ad image of a matte black fragrance bottle on wet basalt, amber rim glow, silver reflections, dense condensation, campaign-grade polish, clean negative space."
+      "output": "Macro ad image of a matte black fragrance bottle on wet basalt with amber rim glow and clean negative space."
     },
     "tier_labels": {
       "default": "Use this first",
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Build one premium campaign-grade image for [SUBJECT]. Make it instantly readable, expensive-looking, and specific enough to feel like a real campaign image instead of generic AI art. Include one dominant focal point, scene, one contrast pair, controlled lighting, camera choice, texture emphasis, palette, and exclusions. Return final image prompt + short negative prompt + caption.",
-    "power_prompt": "Act as a commercial creative director and campaign art supervisor. Produce one hero image concept for [SUBJECT] with one hero subject, one composition hierarchy, one emotional reaction, disciplined palette, defined scene, light behaviour, reflection logic, crop, material realism, and exclusions. Prefer one unmistakable concept over multiple weak ideas. Return final prompt, negative prompt, and three style shifts.",
-    "minimal_prompt": "Create one premium ad-style image for [SUBJECT] with a clear focal point, disciplined palette, strong lighting, tactile material realism, and no clutter or stock-photo feel. Return final prompt + negative prompt + caption.",
+    "default_prompt": "Build one premium campaign-grade image for [SUBJECT] with one dominant focal point, scene, contrast pair, controlled lighting, camera choice, texture emphasis, palette, and exclusions. Return final image prompt + negative prompt + caption.",
+    "power_prompt": "Act as a commercial creative director and campaign art supervisor. Produce one hero image concept for [SUBJECT] with one hero subject, one composition hierarchy, one emotional reaction, defined scene, light behaviour, material realism, palette, and exclusions. Return final prompt, negative prompt, and three style shifts.",
+    "minimal_prompt": "Create one premium ad-style image for [SUBJECT] with a clear focal point, disciplined palette, strong lighting, tactile material realism, and no clutter. Return final prompt + negative prompt + caption.",
     "variants": {
-      "Universal": "Create one premium campaign image for [SUBJECT] with clear focal hierarchy, strong light behaviour, material realism, a disciplined palette, and strict exclusions for clutter or muddy lighting. Return prompt + negative prompt + caption.",
-      "Claude": "Act as a disciplined creative director with strong taste. Prioritise coherence, restraint, and hierarchy over style overload. Define scene, composition, light, lens, material realism, palette, and exclusions. Remove any detail that weakens clarity. Return final prompt, negative prompt, and caption.",
-      "Copilot": "Generate a production-ready image prompt for [SUBJECT] in a premium ad style. Include exact subject, scene, composition, lighting, lens/framing, material textures, colour palette, and exclusions. Keep the output structured and copy-ready. Return prompt, negative prompt, and caption.",
-      "Gemini": "Create a visually cinematic image prompt for [SUBJECT] with strong spatial and sensory detail. Define scene layout, focal hierarchy, camera perspective, light behaviour, tactile textures, palette, and intended emotional impact. Keep it premium and coherent. Return prompt, negative prompt, and caption."
+      "Universal": "Create one premium campaign image for [SUBJECT] with clear focal hierarchy, strong light behaviour, material realism, a disciplined palette, and strict exclusions.",
+      "Claude": "Prioritise coherence, restraint, and hierarchy over style overload. Define scene, composition, light, lens, material realism, palette, and exclusions.",
+      "Copilot": "Generate a production-ready image prompt for [SUBJECT] in a premium ad style with exact subject, scene, composition, lighting, textures, palette, and exclusions.",
+      "Gemini": "Create a visually cinematic image prompt for [SUBJECT] with strong spatial and sensory detail, scene layout, focal hierarchy, camera perspective, light behaviour, textures, and palette."
     },
     "key_improvements": [
-      "Model variants now diverge by behaviour, not just wording.",
-      "Default/power/minimal are labelled by actual user choice.",
-      "Rare insight tells the user why the prompt works, not just how to use it."
+      "Model variants diverge by behaviour.",
+      "Labels tell the user what to use first.",
+      "Rare insight explains why the prompt works."
     ]
   },
   {
@@ -54,27 +54,27 @@
     "category": "image",
     "summary": "High-CTR thumbnail concept prompt for YouTube, reels, and social covers.",
     "use_when": "Use when one-second readability matters more than visual nuance.",
-    "do_not_use_when": "Do not use when the goal is subtle branding or complex artistic storytelling.",
+    "do_not_use_when": "Do not use when the goal is subtle branding.",
     "best_model": "Copilot",
-    "model_fit_note": "Copilot is strongest here because the task is packaging-heavy and benefits from explicit deliverables like overlays and click logic.",
+    "model_fit_note": "Copilot is strongest here because the task is packaging-heavy and benefits from explicit deliverables.",
     "quality_score": 17,
     "viral_score": 19,
-    "proof_note": "High click-through visuals win through clarity and reaction, not detail density.",
-    "common_failure": "The thumbnail is crowded and visually confusing.",
-    "failure_why": "There is no dominant subject and too many visual ideas compete at once.",
-    "quick_patch": "Reduce to one subject, one emotion, one visual question, and preserve text space.",
-    "rare_insight": "Most bad thumbnails fail before style enters the conversation. They fail because the eye has to decode instead of react.",
+    "proof_note": "High CTR visuals win through clarity and reaction.",
+    "common_failure": "The thumbnail is crowded.",
+    "failure_why": "Too many visual ideas compete at once.",
+    "quick_patch": "Reduce to one subject, one emotion, one visual question.",
+    "rare_insight": "Bad thumbnails fail because the eye has to decode instead of react.",
     "compare": {
       "weak": "Make a viral YouTube thumbnail about AI.",
       "improved": "Create a high-CTR thumbnail for a video about AI replacing jobs: one shocked face lit by screen glow, one red warning graph reflection in glasses, dark blurred office behind, strong contrast, left-side negative space for title, visual story readable in 1 second.",
       "why_better": [
         "Uses one dominant subject",
-        "Encodes immediate visual tension",
+        "Encodes visual tension",
         "Protects title-safe composition"
       ]
     },
     "example": {
-      "input": "Topic: AI replaced my workflow in 7 days. Tone: dramatic.",
+      "input": "Topic: AI replaced my workflow in 7 days.",
       "output": "One shocked face, red graph reflection in glasses, dark office behind, strong contrast, clear title space."
     },
     "tier_labels": {
@@ -82,19 +82,19 @@
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Create one thumbnail concept for [TOPIC] optimised for immediate curiosity and high click-through. Use one dominant subject, one emotional reaction or reveal, clean silhouette, simple background, strong contrast, visual story understood in under one second, and title-safe negative space. Return image prompt + 3 overlay options + colour direction.",
-    "power_prompt": "Act as a high-CTR thumbnail strategist. Optimise for one-second comprehension, one obvious focal subject, one clear emotion, and one visual question the viewer wants answered. Specify focal subject, emotion, background simplicity, title-safe negative space, contrast logic, and anti-failure rules. Return final prompt, overlay options, colour direction, and one sentence on why this should click.",
-    "minimal_prompt": "Create a thumbnail prompt for [TOPIC] with one dominant subject, one strong emotional cue, high contrast, clean background, and space for title text. Return prompt + 3 overlay words + colour direction.",
+    "default_prompt": "Create one thumbnail concept for [TOPIC] with one dominant subject, one emotional reveal, strong contrast, clear background, one-second readability, and title-safe negative space. Return image prompt + 3 overlay options + color direction.",
+    "power_prompt": "Act as a high-CTR thumbnail strategist. Optimise for one-second comprehension, one focal subject, one clear emotion, and one visual question. Specify focal subject, emotion, background simplicity, title-safe negative space, contrast logic, and anti-failure rules.",
+    "minimal_prompt": "Create a thumbnail prompt for [TOPIC] with one dominant subject, one emotional cue, high contrast, clean background, and title space.",
     "variants": {
-      "Universal": "Create one high-CTR thumbnail concept for [TOPIC] with one dominant subject, one emotional cue, high contrast, and negative space for title text. Return prompt, overlays, and colour direction.",
-      "Claude": "Design a high-CTR thumbnail for [TOPIC] with brutal clarity: one subject, one emotion, one visual question. Prioritise comprehension speed over decoration. Return prompt, overlay options, colour direction, and a short note on why the composition works.",
-      "Copilot": "Create a thumbnail prompt for [TOPIC] with one dominant subject, a clear emotional reaction, simple background, strong contrast, and room for text. Then output 3 short overlay phrases, colour direction, and one sentence explaining the click logic.",
-      "Gemini": "Generate a click-focused thumbnail concept for [TOPIC] optimised for one-second readability. Define focal subject, emotional cue, spacing for text, contrast strategy, and visual tension. Return prompt, overlays, and colour direction."
+      "Universal": "Create one high-CTR thumbnail concept for [TOPIC] with one dominant subject, one emotional cue, high contrast, and title space.",
+      "Claude": "Design a high-CTR thumbnail for [TOPIC] with one subject, one emotion, and one visual question.",
+      "Copilot": "Create a thumbnail prompt for [TOPIC] with one dominant subject, simple background, strong contrast, room for text, 3 overlay options, and one sentence explaining the click logic.",
+      "Gemini": "Generate a click-focused thumbnail concept for [TOPIC] with strong focal subject, emotional cue, spacing for text, contrast strategy, and visual tension."
     },
     "key_improvements": [
-      "Model variants now clearly separate analytical packaging from visual phrasing.",
+      "Variants separate packaging from visual phrasing.",
       "Rare insight raises the prompt above generic utility.",
-      "Choice labels reduce hesitation about which tier to use."
+      "Choice labels reduce hesitation."
     ]
   },
   {
@@ -102,97 +102,97 @@
     "title": "Film-Still Character Builder",
     "category": "image",
     "summary": "Cinematic portrait prompt that hides biography inside visual detail.",
-    "use_when": "Use when a portrait feels flat and you need implied story, world, or status inside the frame.",
-    "do_not_use_when": "Do not use when you need clean catalogue portraiture or simple reference-sheet output.",
+    "use_when": "Use when a portrait feels flat and you need implied story in the frame.",
+    "do_not_use_when": "Do not use when you need clean catalogue portraiture.",
     "best_model": "Claude",
-    "model_fit_note": "Claude is strongest here because the prompt depends on implication, restraint, and narrative coherence rather than raw ornament.",
+    "model_fit_note": "Claude is strongest here because the prompt depends on implication and narrative coherence.",
     "quality_score": 18,
     "viral_score": 16,
-    "proof_note": "Adding hidden biography and material detail usually beats genre buzzwords.",
-    "common_failure": "The portrait looks like generic cyberpunk/fantasy art.",
-    "failure_why": "It relies on surface descriptors instead of posture, wear, prop logic, and atmosphere.",
-    "quick_patch": "Add one hidden history detail, one lighting source, one lens choice, and one texture note.",
-    "rare_insight": "Portrait prompts get expensive-looking when every visible choice implies history. Style without implication reads cheap.",
+    "proof_note": "Hidden biography and material detail usually beat genre buzzwords.",
+    "common_failure": "The portrait looks generic.",
+    "failure_why": "It relies on surface descriptors instead of history and atmosphere.",
+    "quick_patch": "Add one hidden history detail, one light source, one lens, and one texture note.",
+    "rare_insight": "Portrait prompts get expensive-looking when every visible choice implies history.",
     "compare": {
       "weak": "Create a cool cyberpunk woman portrait.",
       "improved": "Create a prestige-film portrait of a late-30s courier in a rain-soaked retro-futurist city, stoic expression, worn leather collar, faint scar under left eye, projector-blue spill on cheekbone, 85mm close-up, visible skin texture, wet fabric fibres, restrained neon, hidden history implied by patched insignia.",
       "why_better": [
         "Replaces cliché with biography clues",
         "Adds camera and light behaviour",
-        "Uses texture to imply realism and budget"
+        "Uses texture to imply realism"
       ]
     },
     "example": {
       "input": "Character: former underground courier turned resistance leader.",
-      "output": "Close 85mm portrait, projector-blue spill, weathered leather collar, patched insignia, rain haze, scar detail, brutalist blur behind."
+      "output": "Close 85mm portrait, projector-blue spill, weathered leather collar, patched insignia, rain haze."
     },
     "tier_labels": {
       "default": "Use this first",
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Design one unforgettable character portrait for [CHARACTER IDEA] that feels like a still from an unreleased prestige film. Include age range, expression, posture, one signature detail, hidden history through clothing/props/wear, world context, framing, light source, atmosphere, and tactile realism. Return hero prompt + darker version + cleaner editorial version.",
-    "power_prompt": "Act as a prestige-film concept artist and narrative image designer. Create one portrait prompt for [CHARACTER IDEA] that implies a larger world without relying on genre clichés. Do not describe appearance only; imply biography. Every visual element should reveal status, history, or emotional state. Specify signature detail, world texture, lens, angle, light spill, atmosphere, and anti-failure rules. Return hero prompt, darker version, cleaner editorial version, and one line explaining the hidden biography.",
-    "minimal_prompt": "Create a prestige-film character portrait for [CHARACTER IDEA] with implied backstory, strong framing, specific light source, tactile realism, and one signature detail that hints at hidden history. Return hero prompt + darker version + cleaner version.",
+    "default_prompt": "Design one unforgettable character portrait for [CHARACTER IDEA] that feels like a still from an unreleased prestige film. Include signature detail, hidden history, world context, framing, light source, atmosphere, and tactile realism.",
+    "power_prompt": "Act as a prestige-film concept artist and narrative image designer. Create one portrait prompt for [CHARACTER IDEA] that implies a larger world without genre clichés. Every visual element should reveal status, history, or emotional state.",
+    "minimal_prompt": "Create a prestige-film character portrait for [CHARACTER IDEA] with implied backstory, strong framing, a specific light source, and one signature detail.",
     "variants": {
-      "Universal": "Create one prestige-film portrait for [CHARACTER IDEA] with implied biography, strong framing, material detail, one defining signature clue, and specific light behaviour. Return hero, darker, and cleaner versions.",
-      "Claude": "Create a cinematic portrait prompt for [CHARACTER IDEA] with implied biography and world logic. Focus on posture, expression, signature detail, material wear, and atmosphere. Keep it restrained and emotionally loaded. Return hero, darker, and cleaner versions plus one line on what the image implies.",
-      "Copilot": "Write a detailed portrait prompt for [CHARACTER IDEA]. Include appearance, clothing wear, props, posture, mood, world style, lens/framing, lighting, and texture cues. Keep it cinematic and story-rich, then output a main prompt plus two alternate refinements.",
-      "Gemini": "Generate a visually rich portrait prompt for [CHARACTER IDEA] emphasising framing, light behaviour, environmental atmosphere, tactile realism, and emotional tone. Build a clear focal hierarchy and include a hidden-biography clue. Return hero, darker, and cleaner variations."
+      "Universal": "Create one prestige-film portrait for [CHARACTER IDEA] with implied biography, strong framing, material detail, and one defining clue.",
+      "Claude": "Create a cinematic portrait prompt with implied biography and world logic. Focus on posture, expression, signature detail, wear, and atmosphere.",
+      "Copilot": "Write a detailed portrait prompt including appearance, clothing wear, props, posture, mood, world style, lens/framing, and lighting.",
+      "Gemini": "Generate a visually rich portrait prompt emphasizing framing, light behaviour, atmosphere, tactile realism, and emotional tone."
     },
     "key_improvements": [
-      "Model variants now clearly differ by narrative restraint vs production detail vs visual richness.",
-      "Rare insight explains why implication matters more than genre words.",
-      "The tier labels reduce UI friction about what to use first."
+      "Model variants differ by narrative restraint vs production detail vs visual richness.",
+      "Rare insight explains why implication beats genre words.",
+      "Tier labels reduce UI friction."
     ]
   },
   {
     "id": "executive-email-rewrite",
     "title": "Executive Email Rewriter",
     "category": "work",
-    "summary": "Turns rough, emotional, or messy drafts into calm, action-ready professional emails.",
+    "summary": "Turns rough drafts into calm, action-ready professional emails.",
     "use_when": "Use when a message is too long, defensive, unclear, or emotionally noisy.",
-    "do_not_use_when": "Do not use when you still have not decided what you actually need from the recipient.",
+    "do_not_use_when": "Do not use when you have not decided what you actually need from the recipient.",
     "best_model": "Copilot",
-    "model_fit_note": "Copilot is strongest here because the task is workplace-structured and benefits from direct action formatting and deliverable discipline.",
+    "model_fit_note": "Copilot is strongest here because the task is workplace-structured and benefits from action formatting.",
     "quality_score": 17,
     "viral_score": 8,
-    "proof_note": "A strong rewrite preserves the ask while removing emotional drag and ambiguity.",
+    "proof_note": "A strong rewrite preserves the ask while removing ambiguity.",
     "common_failure": "The rewrite sounds polished but the real request becomes vague.",
     "failure_why": "The prompt optimises tone but not structure or action clarity.",
     "quick_patch": "Force the structure: context → key point → action requested → close.",
-    "rare_insight": "Most bad professional emails fail because the writer is trying to protect emotion and intent at the same time. Good rewrite prompts remove emotion first, then rebuild the message around action and consequence.",
+    "rare_insight": "Good rewrite prompts remove emotion first, then rebuild the message around action and consequence.",
     "compare": {
       "weak": "Make this email better.",
       "improved": "Rewrite this draft into a calm, concise, professional email. Preserve the actual request, remove repetition and defensiveness, structure it as context -> key point -> action requested -> close if useful, and return polished + shorter versions with 3 subject lines.",
       "why_better": [
         "Preserves the core intent",
         "Defines structure instead of style only",
-        "Produces multiple usable outputs immediately"
+        "Produces multiple usable outputs"
       ]
     },
     "example": {
-      "input": "Draft complaining that the order list is still not updated and asking for confirmation by tomorrow.",
-      "output": "Context: the order list still misses the updated quantities. Key point: final confirmation is needed to avoid delays. Action: please confirm the final list by tomorrow 12:00."
+      "input": "Draft complaining that the order list is still not updated.",
+      "output": "Context: the order list still misses the updated quantities. Key point: final confirmation is needed to avoid delays. Action: please confirm by tomorrow 12:00."
     },
     "tier_labels": {
       "default": "Use this first",
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Rewrite the message below into a clear, professional email that sounds calm, competent, and easy to act on. Preserve intent, remove repetition, filler, defensiveness, emotional spillover, and vagueness, make the ask obvious, and keep the tone confident but not cold. Return polished version + shorter version + 3 subject lines.",
-    "power_prompt": "Act as an executive communications editor. Rewrite the draft below into a calm, competent, action-ready email. Prioritise: preserve intent, make the specific ask unmistakable, remove emotional drag, improve structure, and maintain a professional but human tone. If important information is missing, say so before rewriting. Return polished, shorter, ultra-short versions, subject lines, and one sentence explaining the real ask.",
-    "minimal_prompt": "Rewrite this draft into a calm, concise, professional email with a clear ask. Remove repetition and defensiveness. Return polished version + shorter version + 3 subject lines.",
+    "default_prompt": "Rewrite the message below into a clear, professional email that sounds calm, competent, and easy to act on. Preserve intent, remove repetition and vagueness, and make the ask obvious. Return polished version + shorter version + 3 subject lines.",
+    "power_prompt": "Act as an executive communications editor. Rewrite the draft below into a calm, competent, action-ready email. Prioritise: preserve intent, make the specific ask unmistakable, remove emotional drag, improve structure, and maintain a professional but human tone.",
+    "minimal_prompt": "Rewrite this draft into a calm, concise, professional email with a clear ask.",
     "variants": {
-      "Universal": "Rewrite the message into a calm, competent, action-ready email. Preserve intent, clarify the ask, remove filler and defensiveness, and structure the result clearly. Return polished and shorter versions plus 3 subject lines.",
-      "Claude": "Rewrite the message into a calm, competent, action-oriented email. Preserve intent, strip out emotional drag, clarify the main ask, and tighten structure. If important information is missing, say so before rewriting. Return polished, shorter, and ultra-short versions plus three subject lines.",
-      "Copilot": "Rewrite this email draft into a professional, concise, easy-to-act-on message. Keep the intent, remove filler and defensive language, structure the content clearly, and output polished, shorter, and ultra-short versions with subject lines and one sentence stating the real ask.",
-      "Gemini": "Transform this draft into a concise professional email with clear action, better tone, and minimal ambiguity. Separate context, main point, and requested action cleanly. Return polished, shorter, and ultra-short versions plus subject line options."
+      "Universal": "Rewrite the message into a calm, competent, action-ready email. Preserve intent, clarify the ask, remove filler, and structure the result clearly.",
+      "Claude": "Rewrite the message into a calm, competent, action-oriented email. Preserve intent, strip out emotional drag, clarify the main ask, and tighten structure.",
+      "Copilot": "Rewrite this email draft into a professional, concise, easy-to-act-on message with polished, shorter, and ultra-short versions.",
+      "Gemini": "Transform this draft into a concise professional email with clear action, better tone, and minimal ambiguity."
     },
     "key_improvements": [
-      "Adds stronger model behaviour separation.",
-      "Rare insight makes the prompt feel more expert than merely useful.",
-      "Choice labels reduce decision friction for busy users."
+      "Stronger model behavior separation.",
+      "Rare insight makes the prompt more expert.",
+      "Choice labels reduce decision friction."
     ]
   },
   {
@@ -201,46 +201,46 @@
     "category": "thinking",
     "summary": "Decision-oriented synthesis prompt for briefings, trade-offs, and recommendations.",
     "use_when": "Use when you need a serious briefing with knowns, unknowns, trade-offs, and an explicit recommendation.",
-    "do_not_use_when": "Do not use when you only want a quick shallow summary or broad brainstorming list.",
+    "do_not_use_when": "Do not use when you only want a quick shallow summary.",
     "best_model": "Claude",
-    "model_fit_note": "Claude fits best because this prompt depends on nuanced distinction, uncertainty handling, and structured reasoning rather than fast practical formatting alone.",
+    "model_fit_note": "Claude fits best because this prompt depends on nuanced distinction, uncertainty handling, and structured reasoning.",
     "quality_score": 18,
     "viral_score": 9,
     "proof_note": "Research gets more trustworthy when facts, assumptions, and uncertainty are separated.",
     "common_failure": "The result becomes polished trivia instead of a decision memo.",
-    "failure_why": "The prompt asks for summary but never asks for question structure, trade-offs, or confidence levels.",
+    "failure_why": "The prompt asks for summary but never asks for trade-offs or confidence levels.",
     "quick_patch": "Force the core question, subquestions, knowns, unknowns, trade-offs, and recommendation sections.",
-    "rare_insight": "Research prompts improve when you stop optimising for completeness and start optimising for decision usefulness. A good synthesis removes irrelevant knowledge instead of admiring it.",
+    "rare_insight": "Research prompts improve when you stop optimising for completeness and start optimising for decision usefulness.",
     "compare": {
       "weak": "Research [topic] and summarize it.",
       "improved": "Build a decision-oriented research synthesis about [topic]. Define the core question, break it into 5-7 subquestions, separate high-confidence findings from contested points, map trade-offs, explain implications for [context], and end with a concise recommendation plus confidence note.",
       "why_better": [
-        "Frames the work around decisions, not trivia",
+        "Frames the work around decisions",
         "Separates confidence from speculation",
-        "Produces output you can actually use"
+        "Produces output you can use"
       ]
     },
     "example": {
       "input": "Question: Should a team standardise on one LLM or use multiple?",
-      "output": "High confidence: models vary by strength. Trade-off: simplicity vs specialisation. Recommendation: use one primary standard with defined exceptions by task."
+      "output": "High confidence: models vary by strength. Trade-off: simplicity vs specialization. Recommendation: use one primary standard with defined exceptions by task."
     },
     "tier_labels": {
       "default": "Use this first",
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Build a decision-oriented research synthesis on [TOPIC / QUESTION]. Return: core question, subquestions, knowns, unknowns, trade-offs, implications, recommendation, and confidence note. Separate facts, assumptions, and interpretation.",
-    "power_prompt": "Act as a lead research analyst producing a decision memo on [TOPIC / QUESTION]. Work in this order: define the core question, derive the minimum subquestions, separate high-confidence findings from thin-evidence claims, identify trade-offs and disagreement points, explain implications, and end with recommendation plus confidence note. If evidence is weak, say so plainly. If interpretations differ, separate them. Add one thing that could change the conclusion.",
-    "minimal_prompt": "Build a decision-oriented research synthesis on [TOPIC]. Return: core question, knowns, unknowns, trade-offs, implications, recommendation, and confidence note. Separate facts from assumptions.",
+    "default_prompt": "Build a decision-oriented research synthesis on [TOPIC / QUESTION]. Return: core question, subquestions, knowns, unknowns, trade-offs, implications, recommendation, and confidence note.",
+    "power_prompt": "Act as a lead research analyst producing a decision memo on [TOPIC / QUESTION]. Define the core question, derive subquestions, separate high-confidence findings from thin-evidence claims, identify trade-offs, explain implications, and end with recommendation plus confidence note and one thing that could change the conclusion.",
+    "minimal_prompt": "Build a decision-oriented research synthesis on [TOPIC]. Return core question, knowns, unknowns, trade-offs, recommendation, and confidence note.",
     "variants": {
-      "Universal": "Build a decision-oriented research synthesis on [TOPIC]. Separate facts, assumptions, and interpretation. Return core question, subquestions, knowns, unknowns, trade-offs, implications, recommendation, and confidence note.",
-      "Claude": "Create a decision memo on [TOPIC / QUESTION]. First define the core question and subquestions, then separate high-confidence findings, thin-evidence claims, trade-offs, and implications for [CONTEXT]. End with a recommendation, confidence note, and one factor that could change the conclusion.",
-      "Copilot": "Write a structured research synthesis about [TOPIC] with sections for core question, subquestions, known facts, uncertainties, trade-offs, implications, recommendation, and confidence note. Keep facts, assumptions, and interpretation separate and practical.",
-      "Gemini": "Generate a decision-oriented research brief on [TOPIC] with clear sections for core question, knowns, unknowns, trade-offs, implications, and final recommendation. If multiple interpretations exist, separate them explicitly and add a confidence note."
+      "Universal": "Build a decision-oriented research synthesis on [TOPIC]. Separate facts, assumptions, and interpretation.",
+      "Claude": "Create a decision memo on [TOPIC / QUESTION]. Define the core question and subquestions, then separate high-confidence findings, thin-evidence claims, trade-offs, and implications.",
+      "Copilot": "Write a structured research synthesis about [TOPIC] with sections for core question, known facts, uncertainties, trade-offs, implications, recommendation, and confidence note.",
+      "Gemini": "Generate a decision-oriented research brief on [TOPIC] with clear sections for core question, knowns, unknowns, trade-offs, implications, and final recommendation."
     },
     "key_improvements": [
-      "Model variants now differ more clearly by reasoning style.",
-      "Rare insight adds intellectual sharpness rather than utility only.",
+      "Model variants differ more clearly by reasoning style.",
+      "Rare insight adds intellectual sharpness.",
       "Choice labels make the fastest valid option obvious."
     ]
   },
@@ -249,48 +249,48 @@
     "title": "Workflow Optimizer",
     "category": "work",
     "summary": "Operational prompt for diagnosing broken processes and designing lower-friction systems.",
-    "use_when": "Use for recurring issues like unclear ownership, checklist failures, handover problems, order-list confusion, and rework.",
-    "do_not_use_when": "Do not use when the process is still too vague to describe or when the problem is interpersonal rather than structural.",
+    "use_when": "Use for recurring issues like unclear ownership, checklist failures, handover problems, and rework.",
+    "do_not_use_when": "Do not use when the process is too vague to describe or when the problem is interpersonal rather than structural.",
     "best_model": "Copilot",
     "model_fit_note": "Copilot is best for this because the task depends on ranked outputs, template fields, and practical future-state deliverables.",
     "quality_score": 18,
     "viral_score": 8,
     "proof_note": "Strong ops prompts rank problems by impact instead of giving generic improvement ideas.",
-    "common_failure": "The model returns vague advice like 'communicate better' or 'use a checklist.'",
-    "failure_why": "The prompt does not define the current-state process, pain points, ranking logic, or output structure.",
+    "common_failure": "The model returns vague advice like communicate better.",
+    "failure_why": "The prompt does not define the current-state process or output structure.",
     "quick_patch": "Describe the current workflow, demand ranked issues, and force a future-state sequence plus template fields.",
-    "rare_insight": "Process prompts get sharper when you force them to distinguish structural failure from interpersonal friction. Otherwise the model hides behind polite abstractions like 'improve communication'.",
+    "rare_insight": "Process prompts get sharper when you force them to distinguish structural failure from interpersonal friction.",
     "compare": {
       "weak": "How can I improve this process?",
       "improved": "Analyse this workflow as an operations strategist. Identify bottlenecks, ambiguity, delays, duplicated effort, and preventable errors. Rank the top five issues by impact, propose a cleaner future-state process, separate quick wins from structural changes, and include ownership, timing, checklist fields, and implementation risks.",
       "why_better": [
-        "Defines what 'improve' means",
-        "Forces prioritisation instead of generic advice",
+        "Defines what improve means",
+        "Forces prioritisation",
         "Produces usable process outputs"
       ]
     },
     "example": {
       "input": "Current process: multiple people update an order list by email; quantities are missed; final confirmation arrives too late; no owner for changes.",
-      "output": "Issue 1: no single owner for final quantity validation. Future state: one shared tracker, one change owner, cutoff time, standardised confirmation template."
+      "output": "Issue 1: no single owner for final quantity validation. Future state: one shared tracker, one change owner, cutoff time, standardized template."
     },
     "tier_labels": {
       "default": "Use this first",
       "power": "Use if quality matters",
       "minimal": "Use if speed matters"
     },
-    "default_prompt": "Analyse this workflow and improve it. Identify friction points, bottlenecks, ambiguities, delays, duplicated effort, and preventable errors. Separate quick wins from structural changes and suggest a cleaner future-state workflow with ownership, timing, communication, checklist, and tracking fields. Return current-state diagnosis, top issues ranked by impact, future-state process, quick wins, template fields, and risks.",
-    "power_prompt": "Act as an operations strategist and process designer. Analyse the workflow below and turn it into a more reliable system. Expose hidden points of failure, rank problems by impact, separate immediate fixes from structural redesign, define ownership/timing/communication clearly, and reduce preventable rework. If the process description is too vague, say what is missing first. If a problem is interpersonal rather than structural, say so. Return diagnosis, ranked issues, future-state workflow, quick wins, template fields, risks, and one assumption that may be wrong.",
-    "minimal_prompt": "Analyse this workflow, rank the main problems by impact, propose a cleaner future-state process, separate quick wins from structural changes, and include checklist/tracker fields plus implementation risks.",
+    "default_prompt": "Analyse this workflow and improve it. Identify friction points, bottlenecks, ambiguities, delays, duplicate effort, and preventable errors. Separate quick wins from structural changes and suggest a cleaner future-state workflow with ownership, timing, communication, checklist, and tracking fields.",
+    "power_prompt": "Act as an operations strategist and process designer. Analyse the workflow below and turn it into a more reliable system. Expose hidden points of failure, rank problems by impact, separate immediate fixes from structural redesign, define ownership and timing clearly, and reduce preventable rework.",
+    "minimal_prompt": "Analyse this workflow, rank the main problems by impact, propose a cleaner future-state process, and include checklist fields plus implementation risks.",
     "variants": {
       "Universal": "Analyse this workflow, rank the main issues by impact, redesign the future-state process, separate quick wins from structural changes, and include checklist fields and implementation risks.",
-      "Claude": "Review this workflow as an operations analyst. Diagnose current-state friction, rank the top issues by impact, propose a cleaner future state, and distinguish quick wins from structural redesign. Include ownership, timing, communication, risk controls, and one assumption that may be wrong.",
-      "Copilot": "Analyse this workflow and improve it. Find bottlenecks, delays, duplicate effort, missing ownership, preventable errors, and ambiguous handoffs. Return diagnosis, ranked issues, improved process, quick wins, checklist fields, risks, and one critical assumption.",
-      "Gemini": "Create a future-state workflow for the process below. Identify failure points, rank issues by impact, improve the sequence, define ownership/timing/tracking, and suggest quick wins with risk controls. If the process description is incomplete, state what is missing first."
+      "Claude": "Review this workflow as an operations analyst. Diagnose current-state friction, rank the top issues by impact, and propose a cleaner future state.",
+      "Copilot": "Analyse this workflow and improve it. Find bottlenecks, delays, duplicate effort, missing ownership, preventable errors, and ambiguous handoffs. Return diagnosis, ranked issues, improved process, quick wins, checklist fields, and risks.",
+      "Gemini": "Create a future-state workflow for the process below. Identify failure points, rank issues by impact, improve the sequence, define ownership/timing/tracking, and suggest quick wins with risk controls."
     },
     "key_improvements": [
-      "Model variants now separate operational reasoning styles more clearly.",
+      "Model variants separate operational reasoning styles more clearly.",
       "Rare insight pushes the prompt beyond generic utility.",
-      "Tier labels now tell the user the fastest best choice."
+      "Tier labels tell the user the fastest best choice."
     ]
   }
 ]
