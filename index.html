@@ -9,11 +9,11 @@
     content="Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini. Proof-backed prompt systems with fast defaults."
   />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap
 
-  <link rel="stylesheet" href="styles/main.css" />
+  styles/main.css
 </head>
 <body>
   <div class="shell">
@@ -28,9 +28,9 @@
       </p>
 
       <div class="hero-actions">
-        <a class="button button-primary" href="#launcher">Try it now</a>
-        <a class="button button-secondary" href="#proof">See weak vs improved</a>
-        <a class="button button-secondary" href="#examples">Browse examples</a>
+        #launcherTry it now</a>
+        #proofSee weak vs improved</a>
+        #examplesBrowse examples</a>
       </div>
     </header>
 
@@ -49,6 +49,7 @@
       </article>
     </section>
 
+    <!-- Launcher -->
     <section class="section launcher-section" id="launcher">
       <div class="launcher-card">
         <p class="section-kicker">Start here</p>
@@ -79,10 +80,10 @@
             </label>
 
             <div class="button-row">
-              <button id="generatePackageButton" class="button button-primary">
+              <button id="generatePackageButton" class="button button-primary" type="button">
                 Build prompt package
               </button>
-              <button id="clearPackageButton" class="button button-secondary">
+              <button id="clearPackageButton" class="button button-secondary" type="button">
                 Clear
               </button>
             </div>
@@ -90,13 +91,13 @@
 
           <div class="launcher-output">
             <div class="output-tabs">
-              <button class="output-tab active" data-output-tab="default">
+              <button class="output-tab active" data-output-tab="default" type="button">
                 Use this first
               </button>
-              <button class="output-tab" data-output-tab="power">
+              <button class="output-tab" data-output-tab="power" type="button">
                 Use if quality matters
               </button>
-              <button class="output-tab" data-output-tab="minimal">
+              <button class="output-tab" data-output-tab="minimal" type="button">
                 Use if speed matters
               </button>
             </div>
@@ -109,13 +110,13 @@
             <pre id="generatedPromptOutput" class="code code--lg"></pre>
 
             <div class="button-row">
-              <button id="copyGeneratedButton" class="button button-primary">
+              <button id="copyGeneratedButton" class="button button-primary" type="button">
                 Copy prompt
               </button>
-              <button id="copyForChatGPTButton" class="button button-secondary">
+              <button id="copyForChatGPTButton" class="button button-secondary" type="button">
                 Copy for ChatGPT
               </button>
-              <button id="copyForCopilotButton" class="button button-secondary">
+              <button id="copyForCopilotButton" class="button button-secondary" type="button">
                 Copy for Copilot
               </button>
             </div>
@@ -135,6 +136,7 @@
       </div>
     </section>
 
+    <!-- Proof -->
     <section id="proof" class="section compare-preview">
       <div class="section-head">
         <div>
@@ -146,11 +148,14 @@
       <div class="compare-frame">
         <div class="compare-column">
           <p class="compare-label">Weak</p>
-          <img src="assets/proof/luxury-ad-shot/weak.webp" alt="Weak luxury ad proof" class="proof-image">
+          assets/proof/luxury-ad-shot/weak.webp
+          <div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/weak.webp</div>
         </div>
+
         <div class="compare-column">
           <p class="compare-label">Improved</p>
-          <img src="assets/proof/luxury-ad-shot/improved.webp" alt="Improved luxury ad proof" class="proof-image">
+          assets/proof/luxury-ad-shot/improved.webp
+          <div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/improved.webp</div>
         </div>
       </div>
 
@@ -161,6 +166,7 @@
       </div>
     </section>
 
+    <!-- Collections -->
     <section id="examples" class="section">
       <div class="section-head">
         <div>
@@ -171,6 +177,7 @@
       <div id="collectionGrid" class="collection-grid"></div>
     </section>
 
+    <!-- Toolbar -->
     <section class="section toolbar-section">
       <div class="toolbar">
         <label>
@@ -198,7 +205,7 @@
           </select>
         </label>
 
-        <button id="copyViewButton" class="button button-secondary toolbar-button">
+        <button id="copyViewButton" class="button button-secondary toolbar-button" type="button">
           Copy view link
         </button>
       </div>
@@ -212,6 +219,7 @@
             <h2>Six prompts that earn their place.</h2>
           </div>
         </div>
+
         <div id="promptGrid" class="prompt-grid"></div>
       </section>
 
@@ -219,19 +227,24 @@
         <section id="builder" class="builder-card">
           <p class="section-kicker">Image builder</p>
           <h2>Build an image prompt in under a minute.</h2>
+
           <div id="builderFields" class="builder-fields"></div>
 
           <div class="builder-style-row" id="styleToggles">
-            <button class="chip chip-active" data-style="clean">Clean</button>
-            <button class="chip" data-style="gritty">Gritty</button>
-            <button class="chip" data-style="cinematic">Cinematic</button>
+            <button class="chip chip-active" data-style="clean" type="button">Clean</button>
+            <button class="chip" data-style="gritty" type="button">Gritty</button>
+            <button class="chip" data-style="cinematic" type="button">Cinematic</button>
           </div>
 
           <pre id="builderOutput" class="code builder-output"></pre>
 
           <div class="builder-actions">
-            <button id="copyBuilderButton" class="button button-primary">Copy prompt</button>
-            <button id="saveBuilderButton" class="button button-secondary">Save to local kit</button>
+            <button id="copyBuilderButton" class="button button-primary" type="button">
+              Copy prompt
+            </button>
+            <button id="saveBuilderButton" class="button button-secondary" type="button">
+              Save to local kit
+            </button>
           </div>
         </section>
 
@@ -258,14 +271,14 @@
 
   <dialog id="detailDialog" class="dialog">
     <div class="dialog-inner">
-      <button id="closeDialogButton" class="dialog-close" aria-label="Close">×</button>
+      <button id="closeDialogButton" class="dialog-close" aria-label="Close" type="button">×</button>
       <div id="detailContent"></div>
     </div>
   </dialog>
 
-  <script src="scripts/state.js"></script>
-  <script src="scripts/ui.js"></script>
-  <script src="scripts/lab.js"></script>
-  <script src="scripts/app.js"></script>
+  scripts/state.jsscript>
+  scripts/ui.jsscript>
+  scripts/lab.jsscript>
+  scripts/app.jsscript>
 </body>
 </html>
