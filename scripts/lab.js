@@ -12,6 +12,7 @@ window.PVLab = {
 
   renderFields() {
     const container = PVUI.byId('builderFields');
+
     container.innerHTML = this.fields.map(([key, label, placeholder]) => `
       <label>
         <span class="meta-label">${label}</span>
