@@ -1,4 +1,3 @@
-
 window.PVLab = {
   fields: [
     ['subject', 'Subject', 'e.g. matte black fragrance bottle'],
@@ -10,6 +9,7 @@ window.PVLab = {
     ['palette', 'Palette', 'e.g. charcoal, silver, amber'],
     ['exclusions', 'Exclusions', 'e.g. clutter, muddy lighting, text artifacts']
   ],
+
   renderFields() {
     const container = PVUI.byId('builderFields');
     container.innerHTML = this.fields.map(([key, label, placeholder]) => `
@@ -18,18 +18,31 @@ window.PVLab = {
         <input data-builder-key="${key}" placeholder="${placeholder}" />
       </label>
     `).join('');
-    container.querySelectorAll('input').forEach(input => input.addEventListener('input', () => this.build()));
+
+    container.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => this.build());
+    });
   },
+
   styleSuffix(style) {
-    if (style === 'gritty') return 'Add slight grit, edge, and tactile imperfection while preserving a clean focal hierarchy.';
-    if (style === 'cinematic') return 'Increase depth, atmosphere, and film-still intensity with disciplined lighting and mood.';
+    if (style === 'gritty') {
+      return 'Add slight grit, edge, and tactile imperfection while preserving a clean focal hierarchy.';
+    }
+    if (style === 'cinematic') {
+      return 'Increase depth, atmosphere, and film-still intensity with disciplined lighting and mood.';
+    }
     return 'Keep the output controlled, premium, and visually clean.';
   },
+
   build() {
     const values = {};
-    document.querySelectorAll('[data-builder-key]').forEach(input => values[input.dataset.builderKey] = input.value.trim());
+    document.querySelectorAll('[data-builder-key]').forEach(input => {
+      values[input.dataset.builderKey] = input.value.trim();
+    });
+
     const style = PVState.activeStyle;
-    const finalPrompt = `You are a creative director and image prompt engineer.
+
+    const output = `You are a creative director and image prompt engineer.
 
 Create one hero image for ${values.subject || '[subject]'}.
 
@@ -48,7 +61,8 @@ Return:
 1) final image prompt
 2) short negative prompt
 3) one-line social caption`;
-    PVUI.byId('builderOutput').textContent = finalPrompt;
-    return finalPrompt;
+
+    PVUI.byId('builderOutput').textContent = output;
+    return output;
   }
 };
