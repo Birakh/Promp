@@ -8,10 +8,12 @@
     name="description"
     content="Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini. Proof-backed prompt systems with fast defaults."
   />
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap
-  styles/main.css
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
   <div class="shell">
@@ -26,9 +28,9 @@
       </p>
 
       <div class="hero-actions">
-        #launcherTry it now</a>
-        #proofSee weak vs improved</a>
-        #examplesBrowse examples</a>
+        <a class="button button-primary" href="#launcher">Try it now</a>
+        <a class="button button-secondary" href="#proof">See weak vs improved</a>
+        <a class="button button-secondary" href="#examples">Browse examples</a>
       </div>
     </header>
 
@@ -47,7 +49,6 @@
       </article>
     </section>
 
-    <!-- V5 launcher -->
     <section class="section launcher-section" id="launcher">
       <div class="launcher-card">
         <p class="section-kicker">Start here</p>
@@ -134,7 +135,6 @@
       </div>
     </section>
 
-    <!-- Homepage proof -->
     <section id="proof" class="section compare-preview">
       <div class="section-head">
         <div>
@@ -146,11 +146,11 @@
       <div class="compare-frame">
         <div class="compare-column">
           <p class="compare-label">Weak</p>
-          assets/proof/luxury-ad-shot/weak.webp
+          <img src="assets/proof/luxury-ad-shot/weak.webp" alt="Weak luxury ad proof" class="proof-image">
         </div>
         <div class="compare-column">
           <p class="compare-label">Improved</p>
-          assets/proof/luxury-ad-shot/improved.webp
+          <img src="assets/proof/luxury-ad-shot/improved.webp" alt="Improved luxury ad proof" class="proof-image">
         </div>
       </div>
 
@@ -212,7 +212,6 @@
             <h2>Six prompts that earn their place.</h2>
           </div>
         </div>
-
         <div id="promptGrid" class="prompt-grid"></div>
       </section>
 
@@ -220,7 +219,6 @@
         <section id="builder" class="builder-card">
           <p class="section-kicker">Image builder</p>
           <h2>Build an image prompt in under a minute.</h2>
-
           <div id="builderFields" class="builder-fields"></div>
 
           <div class="builder-style-row" id="styleToggles">
@@ -232,12 +230,8 @@
           <pre id="builderOutput" class="code builder-output"></pre>
 
           <div class="builder-actions">
-            <button id="copyBuilderButton" class="button button-primary">
-              Copy prompt
-            </button>
-            <button id="saveBuilderButton" class="button button-secondary">
-              Save to local kit
-            </button>
+            <button id="copyBuilderButton" class="button button-primary">Copy prompt</button>
+            <button id="saveBuilderButton" class="button button-secondary">Save to local kit</button>
           </div>
         </section>
 
@@ -269,9 +263,9 @@
     </div>
   </dialog>
 
-  scripts/state.jsscript>
-  scripts/ui.jsscript>
-  scripts/lab.jsscript>
-  scripts/app.jsscript>
+  <script src="scripts/state.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/lab.js"></script>
+  <script src="scripts/app.js"></script>
 </body>
 </html>
