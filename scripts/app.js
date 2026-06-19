@@ -2,23 +2,16 @@
   const els = {
     collectionGrid: PVUI.byId('collectionGrid'),
     promptGrid: PVUI.byId('promptGrid'),
-    previewWeak: PVUI.byId('previewWeak'),
-    previewImproved: PVUI.byId('previewImproved'),
-    previewWhy: PVUI.byId('previewWhy'),
-
     searchInput: PVUI.byId('searchInput'),
     categorySelect: PVUI.byId('categorySelect'),
     modelSelect: PVUI.byId('modelSelect'),
     copyViewButton: PVUI.byId('copyViewButton'),
-
     detailDialog: PVUI.byId('detailDialog'),
     detailContent: PVUI.byId('detailContent'),
     closeDialogButton: PVUI.byId('closeDialogButton'),
-
     kitList: PVUI.byId('kitList'),
     recentList: PVUI.byId('recentList'),
     copiedList: PVUI.byId('copiedList'),
-
     copyBuilderButton: PVUI.byId('copyBuilderButton'),
     saveBuilderButton: PVUI.byId('saveBuilderButton'),
     styleToggles: PVUI.byId('styleToggles')
@@ -102,17 +95,6 @@
     history.replaceState({}, '', PVUI.viewUrl(extra));
   }
 
-  function renderPreview() {
-    const prompt = getFilteredPrompts()[0] || PVState.prompts[0];
-    if (!prompt) return;
-
-    els.previewWeak.textContent = prompt.compare.weak;
-    els.previewImproved.textContent = prompt.compare.improved;
-    els.previewWhy.innerHTML = prompt.compare.why_better
-      .map(item => `<span class="why-item">${PVUI.escapeHtml(item)}</span>`)
-      .join('');
-  }
-
   function renderCollections() {
     els.collectionGrid.innerHTML = PVState.collections.map(collection => `
       <article class="collection-card">
@@ -156,7 +138,6 @@
 
     if (!prompts.length) {
       els.promptGrid.innerHTML = PVUI.renderEmpty('No flagship prompts match the current filters.');
-      renderPreview();
       return;
     }
 
@@ -167,7 +148,7 @@
             <h3 class="prompt-title">${PVUI.escapeHtml(prompt.title)}</h3>
             <p class="prompt-summary">${PVUI.escapeHtml(prompt.summary)}</p>
           </div>
-          <button class="favorite ${isFavorite(prompt.id) ? 'favorite-on' : ''}" data-favorite="${prompt.id}">
+          <button class="favorite ${isFavorite(prompt.id) ? 'favorite-on' : ''}" data-favorite="${prompt.id}" type="button">
             ${isFavorite(prompt.id) ? '★' : '☆'}
           </button>
         </div>
@@ -204,6 +185,7 @@
               class="variant-tab ${(PVState.activeVariants[prompt.id] || 'Universal') === v ? 'active' : ''}"
               data-variant="${prompt.id}"
               data-variant-name="${v}"
+              type="button"
             >
               ${v}
             </button>
@@ -213,9 +195,9 @@
         <pre class="code">${PVUI.escapeHtml(activeVariantText(prompt))}</pre>
 
         <div class="card-actions">
-          <button class="button button-primary" data-copy="${prompt.id}">Copy best default</button>
-          <button class="button button-secondary" data-details="${prompt.id}">See breakdown</button>
-          <button class="button button-secondary" data-kit="${prompt.id}">Save to kit</button>
+          <button class="button button-primary" data-copy="${prompt.id}" type="button">Copy best default</button>
+          <button class="button button-secondary" data-details="${prompt.id}" type="button">See breakdown</button>
+          <button class="button button-secondary" data-kit="${prompt.id}" type="button">Save to kit</button>
         </div>
       </article>
     `).join('');
@@ -258,8 +240,6 @@
         });
       });
     });
-
-    renderPreview();
   }
 
   function renderKit() {
@@ -273,7 +253,7 @@
       ? PVState.recent.map(id => {
           const prompt = getPromptById(id);
           if (!prompt) return '';
-          return `<button class="kit-item" data-open-recent="${prompt.id}">${PVUI.escapeHtml(prompt.title)}</button>`;
+          return `<button class="kit-item" data-open-recent="${prompt.id}" type="button">${PVUI.escapeHtml(prompt.title)}</button>`;
         }).join('')
       : PVUI.renderEmpty('Nothing opened yet.');
 
@@ -396,6 +376,7 @@
               class="variant-tab detail-variant ${(PVState.activeVariants[prompt.id] || 'Universal') === v ? 'active' : ''}"
               data-detail-variant="${prompt.id}"
               data-detail-variant-name="${v}"
+              type="button"
             >
               ${v}
             </button>
@@ -626,6 +607,7 @@
     if (!chip) return;
 
     PVState.activeStyle = chip.dataset.style;
+
     document.querySelectorAll('#styleToggles .chip').forEach(x => {
       x.classList.toggle('chip-active', x.dataset.style === PVState.activeStyle);
     });
