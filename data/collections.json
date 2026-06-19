@@ -2,7 +2,7 @@
   {
     "id": "viral-image-pack",
     "title": "Viral Image Pack",
-    "description": "The sharpest image prompts in the product: premium ad shots, high-CTR thumbnails, and cinematic portraits.",
+    "description": "Premium ad shots, high-CTR thumbnails, and cinematic portraits.",
     "items": [
       "Luxury Ad Shot Generator",
       "Thumbnail That Demands a Click",
@@ -13,20 +13,20 @@
   {
     "id": "operator-pack",
     "title": "Operator Pack",
-    "description": "Practical prompts for emails, broken workflows, and clean communication under pressure.",
+    "description": "Practical prompts for emails and broken workflows.",
     "items": [
       "Executive Email Rewriter",
       "Workflow Optimizer"
     ],
-    "why_it_matters": "Turns rough work problems into clearer messages and stronger systems."
+    "why_it_matters": "Turns rough work problems into sharper communication and systems."
   },
   {
     "id": "thinking-pack",
     "title": "Thinking Pack",
-    "description": "Higher-signal prompts for research and structured reasoning when output quality matters.",
+    "description": "Decision-oriented synthesis when quality matters more than speed.",
     "items": [
       "Deep Research Synthesizer"
     ],
-    "why_it_matters": "Improves trust and usefulness by separating facts, uncertainty, and recommendations."
+    "why_it_matters": "Improves trust by separating facts, uncertainty, and recommendations."
   }
 ]
