@@ -3,282 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prompt Vault V5 — Make AI output better in under a minute</title>
-  <meta
-    name="description"
-    content="Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini. Proof-backed prompt systems with fast defaults."
-  />
-
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap
-
-  styles/main.css
+  <title>Prompt Vault V5 Fixed</title>
+  <meta name="description" content="Turn rough ideas into stronger prompts with proof and fast defaults." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
   <div class="shell">
     <header class="hero">
       <p class="eyebrow">Static • fast • free • model-aware</p>
       <h1>Make AI output better in under a minute</h1>
-      <p class="hero-copy">
-        Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini — with proof, fast defaults, and cleaner results.
-      </p>
-      <p class="hero-sub">
-        Built to be useful fast. Static, free, and disciplined.
-      </p>
-
+      <p class="hero-copy">Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini — with proof, fast defaults, and cleaner results.</p>
       <div class="hero-actions">
-        #launcherTry it now</a>
-        #proofSee weak vs improved</a>
-        #examplesBrowse examples</a>
+        <a class="button button-primary" href="#launcher">Try it now</a>
+        <a class="button button-secondary" href="#proof">See weak vs improved</a>
+        <a class="button button-secondary" href="#examples">Browse examples</a>
       </div>
     </header>
 
     <section class="difference">
-      <article class="mini-card">
-        <h2>Proof &gt; claims</h2>
-        <p>Weak vs improved comparisons, failure modes, and quick fixes.</p>
-      </article>
-      <article class="mini-card">
-        <h2>Fast defaults</h2>
-        <p>Every prompt tells you what to use first, when to go deeper, and when to move fast.</p>
-      </article>
-      <article class="mini-card">
-        <h2>Model-aware</h2>
-        <p>Claude, Copilot, and Gemini variants only where the difference actually matters.</p>
-      </article>
+      <article class="mini-card"><h2>Proof &gt; claims</h2><p>Weak vs improved comparisons, failure modes, and quick fixes.</p></article>
+      <article class="mini-card"><h2>Fast defaults</h2><p>Every prompt tells you what to use first, when to go deeper, and when to move fast.</p></article>
+      <article class="mini-card"><h2>Model-aware</h2><p>Claude, Copilot, and Gemini variants only where the difference actually matters.</p></article>
     </section>
 
-    <!-- Launcher -->
     <section class="section launcher-section" id="launcher">
       <div class="launcher-card">
         <p class="section-kicker">Start here</p>
         <h2>Turn your rough idea into a stronger AI prompt</h2>
-        <p class="muted">
-          Type what you want. Pick the task. Get a better prompt package you can paste into ChatGPT, Copilot, Claude, or Gemini.
-        </p>
-
+        <p class="muted">Type what you want. Pick the task. Get a better prompt package you can paste into ChatGPT, Copilot, Claude, or Gemini.</p>
         <div class="launcher-grid">
           <div class="launcher-inputs">
-            <label class="field">
-              <span>Your rough idea</span>
-              <textarea
-                id="rawIdeaInput"
-                rows="8"
-                placeholder="Example: I want a luxury perfume ad that looks expensive and cinematic."
-              ></textarea>
-            </label>
-
-            <label class="field">
-              <span>Task type</span>
+            <label class="field"><span>Your rough idea</span><textarea id="rawIdeaInput" rows="8" placeholder="Example: I want a luxury perfume ad that looks expensive and cinematic."></textarea></label>
+            <label class="field"><span>Task type</span>
               <select id="taskTypeSelect">
                 <option value="image">Image</option>
                 <option value="email">Email</option>
                 <option value="workflow">Workflow</option>
                 <option value="research">Research</option>
-              </select>
-            </label>
-
+              </select></label>
             <div class="button-row">
-              <button id="generatePackageButton" class="button button-primary" type="button">
-                Build prompt package
-              </button>
-              <button id="clearPackageButton" class="button button-secondary" type="button">
-                Clear
-              </button>
+              <button id="generatePackageButton" class="button button-primary" type="button">Build prompt package</button>
+              <button id="clearPackageButton" class="button button-secondary" type="button">Clear</button>
             </div>
           </div>
-
           <div class="launcher-output">
             <div class="output-tabs">
-              <button class="output-tab active" data-output-tab="default" type="button">
-                Use this first
-              </button>
-              <button class="output-tab" data-output-tab="power" type="button">
-                Use if quality matters
-              </button>
-              <button class="output-tab" data-output-tab="minimal" type="button">
-                Use if speed matters
-              </button>
+              <button class="output-tab active" data-output-tab="default" type="button">Use this first</button>
+              <button class="output-tab" data-output-tab="power" type="button">Use if quality matters</button>
+              <button class="output-tab" data-output-tab="minimal" type="button">Use if speed matters</button>
             </div>
-
-            <div class="boundary">
-              <span class="meta-label">Best on</span>
-              <p id="generatedModelFit">—</p>
-            </div>
-
+            <div class="boundary"><span class="meta-label">Best on</span><p id="generatedModelFit">—</p></div>
             <pre id="generatedPromptOutput" class="code code--lg"></pre>
-
             <div class="button-row">
-              <button id="copyGeneratedButton" class="button button-primary" type="button">
-                Copy prompt
-              </button>
-              <button id="copyForChatGPTButton" class="button button-secondary" type="button">
-                Copy for ChatGPT
-              </button>
-              <button id="copyForCopilotButton" class="button button-secondary" type="button">
-                Copy for Copilot
-              </button>
+              <button id="copyGeneratedButton" class="button button-primary" type="button">Copy prompt</button>
+              <button id="copyForChatGPTButton" class="button button-secondary" type="button">Copy for ChatGPT</button>
+              <button id="copyForCopilotButton" class="button button-secondary" type="button">Copy for Copilot</button>
             </div>
-
             <div class="detail-grid detail-section">
-              <div class="detail-box">
-                <h3>What changed</h3>
-                <ul id="generatedChanges" class="list"></ul>
-              </div>
-              <div class="detail-box">
-                <h3>Why it works</h3>
-                <p id="generatedWhyItWorks" class="muted">—</p>
-              </div>
+              <div class="detail-box"><h3>What changed</h3><ul id="generatedChanges" class="list"></ul></div>
+              <div class="detail-box"><h3>Why it works</h3><p id="generatedWhyItWorks" class="muted">—</p></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Proof -->
     <section id="proof" class="section compare-preview">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Proof</p>
-          <h2>See why the stronger prompt wins</h2>
-        </div>
-      </div>
-
+      <div class="section-head"><div><p class="section-kicker">Proof</p><h2>See why the stronger prompt wins</h2></div></div>
       <div class="compare-frame">
-        <div class="compare-column">
-          <p class="compare-label">Weak</p>
-          assets/proof/luxury-ad-shot/weak.webp
-          <div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/weak.webp</div>
-        </div>
-
-        <div class="compare-column">
-          <p class="compare-label">Improved</p>
-          assets/proof/luxury-ad-shot/improved.webp
-          <div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/improved.webp</div>
-        </div>
+        <div class="compare-column"><p class="compare-label">Weak</p><img src="assets/proof/luxury-ad-shot/weak.webp" alt="Weak luxury ad proof" class="proof-image" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/weak.webp</div></div>
+        <div class="compare-column"><p class="compare-label">Improved</p><img src="assets/proof/luxury-ad-shot/improved.webp" alt="Improved luxury ad proof" class="proof-image" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="empty-state" style="display:none;">Add assets/proof/luxury-ad-shot/improved.webp</div></div>
       </div>
-
-      <div class="why-list">
-        <span class="why-item">clearer focal point</span>
-        <span class="why-item">better lighting control</span>
-        <span class="why-item">less clutter</span>
-      </div>
+      <div class="why-list"><span class="why-item">clearer focal point</span><span class="why-item">better lighting control</span><span class="why-item">less clutter</span></div>
     </section>
 
-    <!-- Collections -->
     <section id="examples" class="section">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Example systems</p>
-          <h2>Three focused packs. No filler.</h2>
-        </div>
-      </div>
+      <div class="section-head"><div><p class="section-kicker">Example systems</p><h2>Three focused packs. No filler.</h2></div></div>
       <div id="collectionGrid" class="collection-grid"></div>
     </section>
 
-    <!-- Toolbar -->
     <section class="section toolbar-section">
       <div class="toolbar">
-        <label>
-          <span>Search</span>
-          <input id="searchInput" type="search" placeholder="Search the flagship prompts" />
-        </label>
-
-        <label>
-          <span>Category</span>
-          <select id="categorySelect">
-            <option value="all">All</option>
-            <option value="image">Image</option>
-            <option value="work">Work</option>
-            <option value="thinking">Thinking</option>
-          </select>
-        </label>
-
-        <label>
-          <span>Model</span>
-          <select id="modelSelect">
-            <option value="all">All</option>
-            <option value="Claude">Claude</option>
-            <option value="Copilot">Copilot</option>
-            <option value="Gemini">Gemini</option>
-          </select>
-        </label>
-
-        <button id="copyViewButton" class="button button-secondary toolbar-button" type="button">
-          Copy view link
-        </button>
+        <label><span>Search</span><input id="searchInput" type="search" placeholder="Search the flagship prompts" /></label>
+        <label><span>Category</span><select id="categorySelect"><option value="all">All</option><option value="image">Image</option><option value="work">Work</option><option value="thinking">Thinking</option></select></label>
+        <label><span>Model</span><select id="modelSelect"><option value="all">All</option><option value="Claude">Claude</option><option value="Copilot">Copilot</option><option value="Gemini">Gemini</option></select></label>
+        <button id="copyViewButton" class="button button-secondary" type="button">Copy view link</button>
       </div>
     </section>
 
     <section class="main-grid">
       <section class="section prompt-section">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Flagship prompts</p>
-            <h2>Six prompts that earn their place.</h2>
-          </div>
-        </div>
-
+        <div class="section-head"><div><p class="section-kicker">Flagship prompts</p><h2>Six prompts that earn their place.</h2></div></div>
         <div id="promptGrid" class="prompt-grid"></div>
       </section>
-
       <aside class="side-panel">
         <section id="builder" class="builder-card">
-          <p class="section-kicker">Image builder</p>
-          <h2>Build an image prompt in under a minute.</h2>
-
+          <p class="section-kicker">Image builder</p><h2>Build an image prompt in under a minute.</h2>
           <div id="builderFields" class="builder-fields"></div>
-
           <div class="builder-style-row" id="styleToggles">
             <button class="chip chip-active" data-style="clean" type="button">Clean</button>
             <button class="chip" data-style="gritty" type="button">Gritty</button>
             <button class="chip" data-style="cinematic" type="button">Cinematic</button>
           </div>
-
           <pre id="builderOutput" class="code builder-output"></pre>
-
           <div class="builder-actions">
-            <button id="copyBuilderButton" class="button button-primary" type="button">
-              Copy prompt
-            </button>
-            <button id="saveBuilderButton" class="button button-secondary" type="button">
-              Save to local kit
-            </button>
+            <button id="copyBuilderButton" class="button button-primary" type="button">Copy prompt</button>
+            <button id="saveBuilderButton" class="button button-secondary" type="button">Save to local kit</button>
           </div>
         </section>
-
-        <section class="kit-card">
-          <p class="section-kicker">Local kit</p>
-          <h2>Saved prompts</h2>
-          <div id="kitList" class="kit-list"></div>
-        </section>
-
-        <section class="kit-card">
-          <p class="section-kicker">Recent</p>
-          <h2>Recently opened</h2>
-          <div id="recentList" class="kit-list"></div>
-        </section>
-
-        <section class="kit-card">
-          <p class="section-kicker">Copied recently</p>
-          <h2>Copy history</h2>
-          <div id="copiedList" class="kit-list"></div>
-        </section>
+        <section class="kit-card"><p class="section-kicker">Local kit</p><h2>Saved prompts</h2><div id="kitList" class="kit-list"></div></section>
+        <section class="kit-card"><p class="section-kicker">Recent</p><h2>Recently opened</h2><div id="recentList" class="kit-list"></div></section>
+        <section class="kit-card"><p class="section-kicker">Copied recently</p><h2>Copy history</h2><div id="copiedList" class="kit-list"></div></section>
       </aside>
     </section>
   </div>
 
-  <dialog id="detailDialog" class="dialog">
-    <div class="dialog-inner">
-      <button id="closeDialogButton" class="dialog-close" aria-label="Close" type="button">×</button>
-      <div id="detailContent"></div>
-    </div>
-  </dialog>
-
-  scripts/state.jsscript>
-  scripts/ui.jsscript>
-  scripts/lab.jsscript>
-  scripts/app.jsscript>
+  <dialog id="detailDialog" class="dialog"><div class="dialog-inner"><button id="closeDialogButton" class="dialog-close" aria-label="Close" type="button">×</button><div id="detailContent"></div></div></dialog>
+  <script src="scripts/state.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/lab.js"></script>
+  <script src="scripts/app.js"></script>
 </body>
 </html>
