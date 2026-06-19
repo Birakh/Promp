@@ -1,0 +1,32 @@
+[
+  {
+    "id": "viral-image-pack",
+    "title": "Viral Image Pack",
+    "description": "The sharpest image prompts in the product: premium ad shots, high-CTR thumbnails, and cinematic portraits.",
+    "items": [
+      "Luxury Ad Shot Generator",
+      "Thumbnail That Demands a Click",
+      "Film-Still Character Builder"
+    ],
+    "why_it_matters": "Fastest path to scroll-stopping visuals and most shareable outputs."
+  },
+  {
+    "id": "operator-pack",
+    "title": "Operator Pack",
+    "description": "Practical prompts for emails, broken workflows, and clean communication under pressure.",
+    "items": [
+      "Executive Email Rewriter",
+      "Workflow Optimizer"
+    ],
+    "why_it_matters": "Turns rough work problems into clearer messages and stronger systems."
+  },
+  {
+    "id": "thinking-pack",
+    "title": "Thinking Pack",
+    "description": "Higher-signal prompts for research and structured reasoning when output quality matters.",
+    "items": [
+      "Deep Research Synthesizer"
+    ],
+    "why_it_matters": "Improves trust and usefulness by separating facts, uncertainty, and recommendations."
+  }
+]
