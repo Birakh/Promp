@@ -1,19 +1,69 @@
-window.PVLab={fields:[['subject','Subject','e.g. matte black fragrance bottle'],['scene','Scene','e.g. wet basalt slab'],['reaction','Audience reaction','e.g. elite + mysterious'],['lighting','Lighting','e.g. hard flash + amber rim light'],['lens','Lens / framing','e.g. macro lens, tight crop'],['texture','Texture emphasis','e.g. condensation, controlled reflections'],['palette','Palette','e.g. charcoal, silver, amber'],['exclusions','Exclusions','e.g. clutter, muddy lighting, text artifacts']],renderFields(){const c=PVUI.byId('builderFields');c.innerHTML=this.fields.map(([k,l,p])=>`<label><span>${l}</span><input data-builder-key="${k}" placeholder="${p}"></label>`).join('');c.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>this.build()))},styleSuffix(s){if(s==='gritty')return 'Add slight grit and tactile imperfection.';if(s==='cinematic')return 'Increase depth, atmosphere, and film-still intensity.';return 'Keep the output controlled and visually clean.'},build(){const v={};document.querySelectorAll('[data-builder-key]').forEach(i=>v[i.dataset.builderKey]=i.value.trim());const s=PVState.activeStyle;const text=`You are a creative director and image prompt engineer.
+window.PVLab = {
+  fields: [
+    ['subject', 'Subject', 'e.g. matte black fragrance bottle'],
+    ['scene', 'Scene', 'e.g. wet basalt slab'],
+    ['reaction', 'Audience reaction', 'e.g. elite + mysterious'],
+    ['lighting', 'Lighting', 'e.g. hard flash + amber rim light'],
+    ['lens', 'Lens / framing', 'e.g. macro lens, tight crop'],
+    ['texture', 'Texture emphasis', 'e.g. condensation, controlled reflections'],
+    ['palette', 'Palette', 'e.g. charcoal, silver, amber'],
+    ['exclusions', 'Exclusions', 'e.g. clutter, muddy lighting, text artifacts']
+  ],
 
-Create one hero image for ${v.subject||'[subject]'}.
+  renderFields() {
+    const container = PVUI.byId('builderFields');
 
-Scene: ${v.scene||'[scene]'}
-Desired audience reaction: ${v.reaction||'[reaction]'}
-Lighting: ${v.lighting||'[lighting]'}
-Lens / framing: ${v.lens||'[lens]'}
-Texture emphasis: ${v.texture||'[texture]'}
-Palette: ${v.palette||'[palette]'}
-Exclusions: ${v.exclusions||'[exclusions]'}
+    container.innerHTML = this.fields.map(([key, label, placeholder]) => `
+      <label>
+        <span class="meta-label">${label}</span>
+        <input data-builder-key="${key}" placeholder="${placeholder}" />
+      </label>
+    `).join('');
 
-Style mode: ${s}
-${this.styleSuffix(s)}
+    container.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => this.build());
+    });
+  },
+
+  styleSuffix(style) {
+    if (style === 'gritty') {
+      return 'Add slight grit, edge, and tactile imperfection while preserving a clean focal hierarchy.';
+    }
+    if (style === 'cinematic') {
+      return 'Increase depth, atmosphere, and film-still intensity with disciplined lighting and mood.';
+    }
+    return 'Keep the output controlled, premium, and visually clean.';
+  },
+
+  build() {
+    const values = {};
+    document.querySelectorAll('[data-builder-key]').forEach(input => {
+      values[input.dataset.builderKey] = input.value.trim();
+    });
+
+    const style = PVState.activeStyle;
+
+    const finalPrompt = `You are a creative director and image prompt engineer.
+
+Create one hero image for ${values.subject || '[subject]'}.
+
+Scene: ${values.scene || '[scene]'}
+Desired audience reaction: ${values.reaction || '[reaction]'}
+Lighting: ${values.lighting || '[lighting]'}
+Lens / framing: ${values.lens || '[lens]'}
+Texture emphasis: ${values.texture || '[texture]'}
+Palette: ${values.palette || '[palette]'}
+Exclusions: ${values.exclusions || '[exclusions]'}
+
+Style mode: ${style}
+${this.styleSuffix(style)}
 
 Return:
 1) final image prompt
 2) short negative prompt
-3) one-line social caption`;PVUI.byId('builderOutput').textContent=text;return text}};
+3) one-line social caption`;
+
+    PVUI.byId('builderOutput').textContent = finalPrompt;
+    return finalPrompt;
+  }
+};
