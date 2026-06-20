@@ -7,7 +7,7 @@
   <title>Prompt Vault V5 — Make AI output better in under a minute</title>
   <meta
     name="description"
-    content="Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini — with proof, fast defaults, and cleaner results."
+    content="Turn rough ideas into stronger prompts for ChatGPT, Copilot, Claude, and Gemini."
   />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,31 +26,33 @@
       <p class="eyebrow">Static • fast • free • model-aware</p>
       <h1>Make AI output better in under a minute</h1>
       <p class="hero-copy">
-        Turn rough ideas into stronger prompts for Claude, Copilot, ChatGPT, and Gemini — with proof, fast defaults, and cleaner results.
+        Turn rough ideas into stronger prompt packages for ChatGPT, Copilot, Claude, and Gemini.
       </p>
       <p class="hero-sub">
-        Type a rough idea, get a stronger prompt package, copy it, and paste it into your favorite AI tool.
+        Type a rough idea, choose the task, copy the improved prompt, and paste it into your favorite AI tool.
       </p>
 
       <div class="hero-actions">
-  <a class="button button-primary" href="#launcher">Try it now</a>
-  <a class="button button-secondary" href="#proof">See weak vs improved</a>
-  <a class="button button-secondary" href="#examples">Browse examples</a>
+        <a class="button button-primary" href="#launcher">Try it now</a>
+        <a class="button button-secondary" href="#proof">See weak vs improved</a>
+        <a class="button button-secondary" href="#examples">Browse examples</a>
       </div>
     </header>
 
     <section class="difference">
       <article class="mini-card">
         <h2>Proof &gt; claims</h2>
-        <p>Weak vs improved comparisons, failure modes, and fast fixes.</p>
+        <p>Weak vs improved examples, failure modes, and fast fixes.</p>
       </article>
+
       <article class="mini-card">
         <h2>Fast defaults</h2>
         <p>Use the safest first version, then go deeper only when quality matters.</p>
       </article>
+
       <article class="mini-card">
         <h2>Model-aware</h2>
-        <p>Claude, Copilot, ChatGPT, and Gemini phrasing where the difference matters.</p>
+        <p>Different phrasing for visual, work, and reasoning tasks.</p>
       </article>
     </section>
 
@@ -59,7 +61,7 @@
         <p class="section-kicker">Start here</p>
         <h2>Turn your rough idea into a stronger AI prompt</h2>
         <p class="muted">
-          Type what you want. Pick the task. Get a cleaner prompt package you can paste into ChatGPT, Copilot, Claude, or Gemini.
+          Type what you want. Pick the task. Get a better prompt package you can paste into your favorite AI tool.
         </p>
 
         <div class="launcher-grid">
@@ -118,6 +120,7 @@
                 <h3>What changed</h3>
                 <ul id="generatedChanges" class="list"></ul>
               </div>
+
               <div class="detail-box">
                 <h3>Why it works</h3>
                 <p id="generatedWhyItWorks" class="muted">—</p>
@@ -139,33 +142,12 @@
       <div class="compare-frame">
         <div class="compare-column">
           <p class="compare-label">Weak</p>
-<div class="compare-frame">
-  <div class="compare-column">
-    <p class="compare-label">Weak</p>
-    <img
-      src="assets/proof/luxury-ad-shot/weak.png"
-      alt="Weak luxury ad proof"
-      class="proof-image"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-    >
-    <div class="empty-state" style="display:none;">
-      Add: assets/proof/luxury-ad-shot/weak.png
-    </div>
-  </div>
-
-  <div class="compare-column">
-    <p class="compare-label">Improved</p>
-    <img
-      src="assets/proof/luxury-ad-shot/improved.png"
-      alt="Improved luxury ad proof"
-      class="proof-image"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-    >
-    <div class="empty-state" style="display:none;">
-      Add: assets/proof/luxury-ad-shot/improved.png
-    </div>
-  </div>
-</div>
+          <img
+            src="assets/proof/luxury-ad-shot/weak.png"
+            alt="Weak luxury ad proof"
+            class="proof-image"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          >
           <div class="empty-state" style="display:none;">
             Add: assets/proof/luxury-ad-shot/weak.png
           </div>
@@ -173,7 +155,12 @@
 
         <div class="compare-column">
           <p class="compare-label">Improved</p>
-          assets/proof/luxury-ad-shot/improved.png
+          <img
+            src="assets/proof/luxury-ad-shot/improved.png"
+            alt="Improved luxury ad proof"
+            class="proof-image"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          >
           <div class="empty-state" style="display:none;">
             Add: assets/proof/luxury-ad-shot/improved.png
           </div>
@@ -194,6 +181,7 @@
           <h2>Three focused packs. No filler.</h2>
         </div>
       </div>
+
       <div id="collectionGrid" class="collection-grid"></div>
     </section>
 
@@ -201,7 +189,7 @@
       <div class="toolbar">
         <label>
           <span>Search</span>
-          <input id="searchInput" type="search" placeholder="Search flagship prompts" />
+          <input id="searchInput" type="search" placeholder="Search flagship prompts">
         </label>
 
         <label>
@@ -291,9 +279,9 @@
     </div>
   </dialog>
 
-<script src="scripts/state.js"></script>
-<script srcjsscript>
-scripts/lab.jsscript>
-scripts/app.jsscript>
+  <script src="scripts/state.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/lab.js"></script>
+  <script src="scripts/app.js"></script>
 </body>
 </html>
