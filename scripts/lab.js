@@ -29,14 +29,17 @@ window.PVLab = {
     if (style === 'gritty') {
       return 'Add slight grit, edge, and tactile imperfection while preserving a clean focal hierarchy.';
     }
+
     if (style === 'cinematic') {
       return 'Increase depth, atmosphere, and film-still intensity with disciplined lighting and mood.';
     }
+
     return 'Keep the output controlled, premium, and visually clean.';
   },
 
   build() {
     const values = {};
+
     document.querySelectorAll('[data-builder-key]').forEach(input => {
       values[input.dataset.builderKey] = input.value.trim();
     });
