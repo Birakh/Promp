@@ -1,127 +1,7 @@
 (async function () {
   const els = {
-    collectionGrid: PVUI.byId });    collectionGrid: PVUI.byId('collectionGrid'),
-      });
-    });
-
-    document.querySelectorAll('[data-open-card]').forEach(card => {
-      card.addEventListener('click', event => {
-        if (event.target.closest('button')) return;
-        openDetail(card.dataset.openCard);
-      });
-    });
-  }
-
-  function renderKit() {
-    if (!PVState.kit.length) {
-      els.kitList.innerHTML = PVUI.renderEmpty('No saved prompts yet.');
-      return;
-    }
-
-    els.kitList.innerHTML = PVState.kit.map(item => `
-      <div class="kit-item">${PVUI.escapeHtml(item.title)}</div>
-    `).join('');
-  }
-
-  function renderRecent() {
-    if (!PVState.recent.length) {
-      els.recentList.innerHTML = PVUI.renderEmpty('Nothing opened yet.');
-      return;
-    }
-
-    els.recentList.innerHTML = PVState.recent.map(id => {
-      const prompt = getPromptById(id);
-      if (!prompt) return '';
-
-      return `
-        <button class="kit-item" data-open-recent="${prompt.id}" type="button">
-          ${PVUI.escapeHtml(prompt.title)}
-        </button>
-      `;
-    }).join('');
-
-    document.querySelectorAll('[data-open-recent]').forEach(button => {
-      button.addEventListener('click', () => openDetail(button.dataset.openRecent));
-    });
-  }
-
-  function renderCopied() {
-    if (!PVState.copied.length) {
-      els.copiedList.innerHTML = PVUI.renderEmpty('Nothing copied yet.');
-      return;
-    }
-
-    els.copiedList.innerHTML = PVState.copied.map(title => `
-      <div class="kit-item">${PVUI.escapeHtml(title)}</div>
-    `).join('');
-  }
-
-  function openDetail(id) {
-    const prompt = getPromptById(id);
-    if (!prompt) return;
-
-    trackRecent(id);
-    renderRecent();
-
-    els.detailContent.innerHTML = `
-      <p class="section-kicker">Flagship prompt</p>
-      <h2>${PVUI.escapeHtml(prompt.title)}</h2>
-      <p>${PVUI.escapeHtml(prompt.summary)}</p>
-
-      <div class="detail-grid detail-section">
-        <div class="detail-box">
-          <h3>Use when</h3>
-          <p>${PVUI.escapeHtml(prompt.use_when)}</p>
-        </div>
-        <div class="detail-box">
-          <h3>Do not use when</h3>
-          <p>${PVUI.escapeHtml(prompt.do_not_use_when)}</p>
-        </div>
-      </div>
-
-      <div class="compare-grid detail-section">
-        <div class="detail-box">
-          <h3>Weak prompt</h3>
-          <pre class="code">${PVUI.escapeHtml(prompt.compare.weak)}</pre>
-        </div>
-        <div class="detail-box">
-          <h3>Improved prompt</h3>
-          <pre class="code">${PVUI.escapeHtml(prompt.compare.improved)}</pre>
-        </div>
-      </div>
-
-      <div class="detail-section detail-box">
-        <h3>Why it got better</h3>
-        <ul class="list">
-          ${prompt.compare.why_better.map(item => `<li>${PVUI.escapeHtml(item)}</li>`).join('')}
-        </ul>
-      </div>
-
-      <div class="detail-grid detail-section">
-        <div class="detail-box">
-          <h3>Common failure</h3>
-          <p>${PVUI.escapeHtml(prompt.common_failure)}</p>
-          <p><strong>Why:</strong> ${PVUI.escapeHtml(prompt.failure_why)}</p>
-        </div>
-        <div class="detail-box">
-          <h3>Quick patch</h3>
-          <p>${PVUI.escapeHtml(prompt.quick_patch)}</p>
-        </div>
-      </div>
-
-      <div class="detail-grid detail-section">
-        <div class="detail-box">
-          <h3>Example input</h3>
-          <pre class="code">${PVUI.escapeHtml(prompt.example.input)}</pre>
-        </div>
-        <div class="detail-box">
-          <h3>Expected output shape</h3>
-          <pre class="code">${PVUI.escapeHtml(prompt.example.output)}</pre>
-        </div>
-      </div>
-
-      <div class="detail-section detail-box">
-        <h3>Model variants</h3>
+    collectionGrid: PVUI.byId('collectionGrid'),
+    variants</h3>    promptGrid: PVUI.byId('promptGrid'),
         <div class="variant-tabs">
           ${['Universal', 'Claude', 'Copilot', 'Gemini'].map(variant => `
             <button
@@ -206,23 +86,19 @@
       };
     }
 
-    if (taskType === 'research') {
-      return {
-        bestModel: 'Claude',
-        whyModel: 'Best on Claude because this task depends on reasoning quality, uncertainty handling, and nuanced synthesis.',
-        whyItWorks: 'Research prompts become useful when they optimize for decision pressure, not completeness.',
-        changes: [
-          'Defined a core question instead of broad summary',
-          'Separated knowns from unknowns',
-          'Forced trade-offs and recommendation'
-        ],
-        default: `Build a decision-oriented research synthesis about the following topic or question:\n\n${cleaned}\n\nReturn:\n1) core question\n2) subquestions\n3) knowns\n4) unknowns or contested points\n5) trade-offs\n6) implications\n7) recommendation\n8) confidence note`,
-        power: `Act as a lead research analyst producing a decision memo on the topic below:\n\n${cleaned}\n\nRequirements:\n- define the core question\n- derive the minimum subquestions needed to answer it\n- separate high-confidence findings from thin-evidence claims\n- identify trade-offs and disagreement points\n- explain implications\n- end with recommendation, confidence note, and one thing that could change the conclusion\n\nReturn exactly:\nA) core question\nB) subquestions\nC) knowns\nD) unknowns\nE) trade-offs\nF) implications\nG) recommendation\nH) confidence note\nI) what would change the conclusion`,
-        minimal: `Build a decision-oriented research synthesis on this topic and return core question, knowns, unknowns, trade-offs, recommendation, and confidence note:\n\n${cleaned}`
-      };
-    }
-
-    return null;
+    return {
+      bestModel: 'Claude',
+      whyModel: 'Best on Claude because this task depends on reasoning quality, uncertainty handling, and nuanced synthesis.',
+      whyItWorks: 'Research prompts become useful when they optimize for decision pressure, not completeness.',
+      changes: [
+        'Defined a core question instead of broad summary',
+        'Separated knowns from unknowns',
+        'Forced trade-offs and recommendation'
+      ],
+      default: `Build a decision-oriented research synthesis about the following topic or question:\n\n${cleaned}\n\nReturn:\n1) core question\n2) subquestions\n3) knowns\n4) unknowns or contested points\n5) trade-offs\n6) implications\n7) recommendation\n8) confidence note`,
+      power: `Act as a lead research analyst producing a decision memo on the topic below:\n\n${cleaned}\n\nRequirements:\n- define the core question\n- derive the minimum subquestions needed to answer it\n- separate high-confidence findings from thin-evidence claims\n- identify trade-offs and disagreement points\n- explain implications\n- end with recommendation, confidence note, and one thing that could change the conclusion\n\nReturn exactly:\nA) core question\nB) subquestions\nC) knowns\nD) unknowns\nE) trade-offs\nF) implications\nG) recommendation\nH) confidence note\nI) what would change the conclusion`,
+      minimal: `Build a decision-oriented research synthesis on this topic and return core question, knowns, unknowns, trade-offs, recommendation, and confidence note:\n\n${cleaned}`
+    };
   }
 
   function renderGeneratedPackage() {
@@ -364,13 +240,20 @@
     PVLab.build();
   });
 
-  const [promptsRes, collectionsRes] = await Promise.all([
-    fetch('data/prompts.json'),
-    fetch('data/collections.json')
-  ]);
+  try {
+    const [promptsRes, collectionsRes] = await Promise.all([
+      fetch('data/prompts.json'),
+      fetch('data/collections.json')
+    ]);
 
-  PVState.prompts = await promptsRes.json();
-  PVState.collections = await collectionsRes.json();
+    PVState.prompts = await promptsRes.json();
+    PVState.collections = await collectionsRes.json();
+  } catch (error) {
+    els.collectionGrid.innerHTML = PVUI.renderEmpty('Could not load data/collections.json');
+    els.promptGrid.innerHTML = PVUI.renderEmpty('Could not load data/prompts.json');
+    console.error(error);
+    return;
+  }
 
   PVState.prompts.forEach(prompt => {
     if (!PVState.activeVariants[prompt.id]) {
@@ -388,7 +271,6 @@
   renderPrompts();
   bindLauncher();
 })();
-    promptGrid: PVUI.byId('promptGrid'),
 
     searchInput: PVUI.byId('searchInput'),
     categorySelect: PVUI.byId('categorySelect'),
@@ -446,6 +328,7 @@
 
   function addToKit(item) {
     const key = `${item.type}:${item.id}`;
+
     PVState.kit = [
       item,
       ...PVState.kit.filter(existing => `${existing.type}:${existing.id}` !== key)
@@ -669,3 +552,124 @@
           id: prompt.id,
           title: prompt.title,
           text: activeVariantText(prompt)
+        });
+      });
+    });
+
+    document.querySelectorAll('[data-open-card]').forEach(card => {
+      card.addEventListener('click', event => {
+        if (event.target.closest('button')) return;
+        openDetail(card.dataset.openCard);
+      });
+    });
+  }
+
+  function renderKit() {
+    if (!PVState.kit.length) {
+      els.kitList.innerHTML = PVUI.renderEmpty('No saved prompts yet.');
+      return;
+    }
+
+    els.kitList.innerHTML = PVState.kit.map(item => `
+      <div class="kit-item">${PVUI.escapeHtml(item.title)}</div>
+    `).join('');
+  }
+
+  function renderRecent() {
+    if (!PVState.recent.length) {
+      els.recentList.innerHTML = PVUI.renderEmpty('Nothing opened yet.');
+      return;
+    }
+
+    els.recentList.innerHTML = PVState.recent.map(id => {
+      const prompt = getPromptById(id);
+      if (!prompt) return '';
+
+      return `
+        <button class="kit-item" data-open-recent="${prompt.id}" type="button">
+          ${PVUI.escapeHtml(prompt.title)}
+        </button>
+      `;
+    }).join('');
+
+    document.querySelectorAll('[data-open-recent]').forEach(button => {
+      button.addEventListener('click', () => openDetail(button.dataset.openRecent));
+    });
+  }
+
+  function renderCopied() {
+    if (!PVState.copied.length) {
+      els.copiedList.innerHTML = PVUI.renderEmpty('Nothing copied yet.');
+      return;
+    }
+
+    els.copiedList.innerHTML = PVState.copied.map(title => `
+      <div class="kit-item">${PVUI.escapeHtml(title)}</div>
+    `).join('');
+  }
+
+  function openDetail(id) {
+    const prompt = getPromptById(id);
+    if (!prompt) return;
+
+    trackRecent(id);
+    renderRecent();
+
+    els.detailContent.innerHTML = `
+      <p class="section-kicker">Flagship prompt</p>
+      <h2>${PVUI.escapeHtml(prompt.title)}</h2>
+      <p>${PVUI.escapeHtml(prompt.summary)}</p>
+
+      <div class="detail-grid detail-section">
+        <div class="detail-box">
+          <h3>Use when</h3>
+          <p>${PVUI.escapeHtml(prompt.use_when)}</p>
+        </div>
+        <div class="detail-box">
+          <h3>Do not use when</h3>
+          <p>${PVUI.escapeHtml(prompt.do_not_use_when)}</p>
+        </div>
+      </div>
+
+      <div class="compare-grid detail-section">
+        <div class="detail-box">
+          <h3>Weak prompt</h3>
+          <pre class="code">${PVUI.escapeHtml(prompt.compare.weak)}</pre>
+        </div>
+        <div class="detail-box">
+          <h3>Improved prompt</h3>
+          <pre class="code">${PVUI.escapeHtml(prompt.compare.improved)}</pre>
+        </div>
+      </div>
+
+      <div class="detail-section detail-box">
+        <h3>Why it got better</h3>
+        <ul class="list">
+          ${prompt.compare.why_better.map(item => `<li>${PVUI.escapeHtml(item)}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="detail-grid detail-section">
+        <div class="detail-box">
+          <h3>Common failure</h3>
+          <p>${PVUI.escapeHtml(prompt.common_failure)}</p>
+          <p><strong>Why:</strong> ${PVUI.escapeHtml(prompt.failure_why)}</p>
+        </div>
+        <div class="detail-box">
+          <h3>Quick patch</h3>
+          <p>${PVUI.escapeHtml(prompt.quick_patch)}</p>
+        </div>
+      </div>
+
+      <div class="detail-grid detail-section">
+        <div class="detail-box">
+          <h3>Example input</h3>
+          <pre class="code">${PVUI.escapeHtml(prompt.example.input)}</pre>
+        </div>
+        <div class="detail-box">
+          <h3>Expected output shape</h3>
+          <pre class="code">${PVUI.escapeHtml(prompt.example.output)}</pre>
+        </div>
+      </div>
+
+      <div class="detail-section detail-box">
