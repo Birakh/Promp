@@ -1,11 +1,11 @@
 window.PVUI = {
   escapeHtml(text) {
-    return String(text).replace(/[&<>"]/g, m => ({
+    return String(text).replace(/[&<>"]/g, match => ({
       '&': '&amp;',
       '<': '&lt;',
       '>': '&gt;',
       '"': '&quot;'
-    }[m]));
+    }[match]));
   },
 
   byId(id) {
@@ -27,9 +27,12 @@ window.PVUI = {
     if (category !== 'all') search.set('category', category);
     if (model !== 'all') search.set('model', model);
 
-    Object.entries(extra).forEach(([k, v]) => {
-      if (v === null || v === undefined || v === '') search.delete(k);
-      else search.set(k, v);
+    Object.entries(extra).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === '') {
+        search.delete(key);
+      } else {
+        search.set(key, value);
+      }
     });
 
     return `${location.pathname}${search.toString() ? '?' + search.toString() : ''}`;
