@@ -18,12 +18,12 @@
       "improved": "Create one premium ad shot for a matte black perfume bottle on wet basalt, minimal luxury fused with raw cinematic imperfection, hard flash plus amber rim light, macro lens, controlled reflections, dense condensation, charcoal / silver / amber palette, clean silhouette, negative space for copy, avoid clutter and stock-photo feel.",
       "why_better": [
         "Defines the shot, not just the object",
-        "Adds tension: minimal luxury + raw imperfection",
+        "Adds tension: minimal luxury plus raw imperfection",
         "Controls common failures with exclusions"
       ]
     },
     "example": {
-      "input": "Product: Nocturne fragrance bottle, matte black glass, mysterious + elite mood.",
+      "input": "Product: Nocturne fragrance bottle, matte black glass, mysterious and elite mood.",
       "output": "Macro ad image of a matte black fragrance bottle on wet basalt, amber rim glow, silver reflections, dense condensation, campaign-grade polish, clean negative space."
     },
     "variants": {
@@ -31,8 +31,7 @@
       "Claude": "Act as a disciplined creative director. Prioritise coherence, restraint, and hierarchy over style overload. Define scene, composition, light, lens, material realism, palette, and exclusions. Return final prompt, negative prompt, and caption.",
       "Copilot": "Generate a production-ready image prompt for [SUBJECT] in a premium ad style. Include subject, scene, composition, lighting, lens/framing, material textures, colour palette, and exclusions. Return prompt, negative prompt, and caption.",
       "Gemini": "Create a visually cinematic image prompt for [SUBJECT] with strong spatial and sensory detail. Define scene layout, focal hierarchy, camera perspective, light behaviour, tactile textures, palette, and intended emotional impact. Return prompt, negative prompt, and caption."
-    },
-    "collection_ids": ["viral-image-pack"]
+    }
   },
   {
     "id": "thumbnail-ctr",
@@ -66,8 +65,7 @@
       "Claude": "Design a high-CTR thumbnail for [TOPIC] with brutal clarity: one subject, one emotion, one visual question. Prioritise comprehension speed over decoration. Return prompt, overlay options, colour direction, and a short note on why the composition works.",
       "Copilot": "Create a thumbnail prompt for [TOPIC] with one dominant subject, a clear emotional reaction, simple background, strong contrast, and room for text. Then output 3 short overlay phrases, colour direction, and one sentence explaining the click logic.",
       "Gemini": "Generate a click-focused thumbnail concept for [TOPIC] optimised for one-second readability. Define focal subject, emotional cue, spacing for text, contrast strategy, and visual tension. Return prompt, overlays, and colour direction."
-    },
-    "collection_ids": ["viral-image-pack"]
+    }
   },
   {
     "id": "film-still-character",
@@ -101,8 +99,7 @@
       "Claude": "Create a cinematic portrait prompt for [CHARACTER IDEA] with implied biography and world logic. Focus on posture, expression, signature detail, material wear, and atmosphere. Keep it restrained and emotionally loaded. Return hero, darker, and cleaner versions plus one line on what the image implies.",
       "Copilot": "Write a detailed portrait prompt for [CHARACTER IDEA]. Include appearance, clothing wear, props, posture, mood, world style, lens/framing, lighting, and texture cues. Keep it cinematic and story-rich, then output a main prompt plus two alternate refinements.",
       "Gemini": "Generate a visually rich portrait prompt for [CHARACTER IDEA], emphasizing framing, light behavior, tactile realism, and emotional tone. Add one darker variation and one cleaner editorial variation."
-    },
-    "collection_ids": ["viral-image-pack"]
+    }
   },
   {
     "id": "executive-email-rewrite",
@@ -136,8 +133,7 @@
       "Claude": "Rewrite the following message into a calm, competent, action-oriented email. Preserve intent, remove defensiveness and filler, and make the requested action explicit. Return polished, shorter, and ultra-short versions plus 3 subject lines.",
       "Copilot": "Rewrite this email draft to be professional, concise, and easy to act on. Keep the intent, remove filler and emotional language, structure the message clearly, and provide 3 subject line options.",
       "Gemini": "Transform the draft into a concise professional email with clear action, better tone, and minimal ambiguity. Return a polished version, a shorter version, and three subject line choices."
-    },
-    "collection_ids": ["operator-pack"]
+    }
   },
   {
     "id": "deep-research-synthesizer",
@@ -171,8 +167,7 @@
       "Claude": "Create a research memo on [TOPIC] optimized for decision-making. First define the core question and subquestions, then separate high-confidence findings, contested points, trade-offs, and implications for [CONTEXT]. End with a recommendation and a confidence note.",
       "Copilot": "Write a structured research synthesis about [TOPIC] with sections for core question, subquestions, known facts, uncertainties, trade-offs, implications, and recommendation. Include a comparison table if relevant.",
       "Gemini": "Generate a decision-oriented research brief on [TOPIC] with clear sections for knowns, unknowns, trade-offs, implications, and final recommendation. Keep facts, assumptions, and interpretation separate."
-    },
-    "collection_ids": ["thinking-pack"]
+    }
   },
   {
     "id": "workflow-optimizer",
@@ -192,7 +187,7 @@
       "weak": "How can I improve this process?",
       "improved": "Analyze this workflow as an operations strategist. Identify bottlenecks, ambiguity, delays, duplicated effort, and preventable errors. Rank the top five issues by impact, propose a cleaner future-state process, separate quick wins from structural changes, and include ownership, timing, checklist fields, and implementation risks.",
       "why_better": [
-        "Defines what 'improve' actually means",
+        "Defines what improve actually means",
         "Forces prioritization instead of generic advice",
         "Produces usable process outputs"
       ]
@@ -206,7 +201,6 @@
       "Claude": "Review this workflow as an operations analyst. Diagnose the current-state friction, rank the top issues, propose a cleaner step-by-step future state, and distinguish immediate fixes from structural redesign. Include ownership, timing, communication, and risk controls.",
       "Copilot": "Analyze this workflow and improve it. Find bottlenecks, delays, duplicate effort, missing ownership, and preventable errors. Return diagnosis, ranked issues, improved process, quick wins, template/checklist fields, and implementation risks.",
       "Gemini": "Create a future-state workflow for the process below. Identify failure points, rank issues by impact, improve the sequence, define ownership/timing/tracking, and suggest quick wins plus risk controls."
-    },
-    "collection_ids": ["operator-pack"]
+    }
   }
 ]
