@@ -1,253 +1,6 @@
 (async function () {
   const els = {
-    collectionGrid: PVUI.byId('collectionGrid'),
-    promptGrid: PVUI.byId('promptGrid'),
-    searchInput: PVUI.byId('searchInput'),
-    categorySelect: PVUI.byId('categorySelect'),
-    modelSelect: PVUI.byId('modelSelect'),
-    copyViewButton: PVUI.byId('copyViewButton'),
-    detailDialog: PVUI.byId('detailDialog'),
-    detailContent: PVUI.byId('detailContent'),
-    closeDialogButton: PVUI.byId('closeDialogButton'),
-    kitList: PVUI.byId('kitList'),
-    recentList: PVUI.byId('recentList'),
-    copiedList: PVUI.byId('copiedList'),
-    copyBuilderButton: PVUI.byId('copyBuilderButton'),
-    saveBuilderButton: PVUI.byId('saveBuilderButton'),
-    styleToggles: PVUI.byId('styleToggles')
-  };
-
-  const launcherEls = {
-    rawIdeaInput: PVUI.byId('rawIdeaInput'),
-    taskTypeSelect: PVUI.byId('taskTypeSelect'),
-    generatePackageButton: PVUI.byId('generatePackageButton'),
-    clearPackageButton: PVUI.byId('clearPackageButton'),
-    generatedPromptOutput: PVUI.byId('generatedPromptOutput'),
-    generatedModelFit: PVUI.byId('generatedModelFit'),
-    generatedChanges: PVUI.byId('generatedChanges'),
-    generatedWhyItWorks: PVUI.byId('generatedWhyItWorks'),
-    copyGeneratedButton: PVUI.byId('copyGeneratedButton'),
-    copyForChatGPTButton: PVUI.byId('copyForChatGPTButton'),
-    copyForCopilotButton: PVUI.byId('copyForCopilotButton')
-  };
-
-  function persistAll() {
-    PVStorage.save('pv5-favorites', PVState.favorites);
-    PVStorage.save('pv5-kit', PVState.kit);
-    PVStorage.save('pv5-recent', PVState.recent);
-    PVStorage.save('pv5-copied', PVState.copied);
-  }
-
-  function isFavorite(id) {
-    return PVState.favorites.includes(id);
-  }
-
-  function toggleFavorite(id) {
-    PVState.favorites = isFavorite(id)
-      ? PVState.favorites.filter(x => x !== id)
-      : [...PVState.favorites, id];
-
-    persistAll();
-    renderPrompts();
-  }
-
-  function addToKit(item) {
-    const key = item.type + ':' + item.id;
-    PVState.kit = [item, ...PVState.kit.filter(x => `${x.type}:${x.id}` !== key)].slice(0, 12);
-    persistAll();
-    renderKit();
-  }
-
-  function trackRecent(id) {
-    PVState.recent = [id, ...PVState.recent.filter(x => x !== id)].slice(0, 8);
-    persistAll();
-    renderRecent();
-  }
-
-  function trackCopy(title) {
-    PVState.copied = [title, ...PVState.copied.filter(x => x !== title)].slice(0, 8);
-    persistAll();
-    renderCopied();
-  }
-
-  function getPromptById(id) {
-    return PVState.prompts.find(p => p.id === id);
-  }
-
-  function activeVariantText(prompt) {
-    const variant = PVState.activeVariants[prompt.id] || 'Universal';
-    return prompt.variants[variant] || prompt.variants.Universal;
-  }
-
-  function applyUrlState() {
-    const params = new URLSearchParams(location.search);
-    const q = params.get('q');
-    const category = params.get('category');
-    const model = params.get('model');
-
-    if (q) els.searchInput.value = q;
-    if (category) els.categorySelect.value = category;
-    if (model) els.modelSelect.value = model;
-  }
-
-  function updateUrl(extra = {}) {
-    history.replaceState({}, '', PVUI.viewUrl(extra));
-  }
-
-  function renderCollections() {
-    els.collectionGrid.innerHTML = PVState.collections.map(collection => `
-      <article class="collection-card collection-clickable" data-collection="${collection.id}">
-        <p class="section-kicker">Pack</p>
-        <h3>${PVUI.escapeHtml(collection.title)}</h3>
-        <p>${PVUI.escapeHtml(collection.description)}</p>
-        <div class="collection-list">
-          ${collection.items.map(item => `<span class="tag">${PVUI.escapeHtml(item)}</span>`).join('')}
-        </div>
-        <p><strong>Why it matters:</strong> ${PVUI.escapeHtml(collection.why_it_matters)}</p>
-      </article>
-    `).join('');
-
-    document.querySelectorAll('[data-collection]').forEach(card => {
-      card.addEventListener('click', () => {
-        const id = card.dataset.collection;
-
-        if (id === 'viral-image-pack') {
-          els.categorySelect.value = 'image';
-        } else if (id === 'operator-pack') {
-          els.categorySelect.value = 'work';
-        } else if (id === 'thinking-pack') {
-          els.categorySelect.value = 'thinking';
-        }
-
-        renderPrompts();
-        document.querySelector('.prompt-section')?.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  }
-
-  function getFilteredPrompts() {
-    const q = els.searchInput.value.trim().toLowerCase();
-    const category = els.categorySelect.value;
-    const model = els.modelSelect.value;
-
-    return PVState.prompts.filter(prompt => {
-      const haystack = [
-        prompt.title,
-        prompt.summary,
-        prompt.use_when,
-        prompt.do_not_use_when,
-        prompt.common_failure,
-        prompt.quick_patch,
-        prompt.category
-      ].join(' ').toLowerCase();
-
-      const searchOk = !q || haystack.includes(q);
-      const categoryOk = category === 'all' || prompt.category === category;
-      const modelOk = model === 'all' || prompt.best_model === model || Object.keys(prompt.variants).includes(model);
-
-      return searchOk && categoryOk && modelOk;
-    });
-  }
-
-  function renderPrompts() {
-    const prompts = getFilteredPrompts();
-
-    if (!prompts.length) {
-      els.promptGrid.innerHTML = PVUI.renderEmpty('No flagship prompts match the current filters.');
-      return;
-    }
-
-    els.promptGrid.innerHTML = prompts.map(prompt => `
-      <article class="prompt-card prompt-clickable" data-open-card="${prompt.id}">
-        <div class="prompt-head">
-          <div>
-            <h3 class="prompt-title">${PVUI.escapeHtml(prompt.title)}</h3>
-            <p class="prompt-summary">${PVUI.escapeHtml(prompt.summary)}</p>
-          </div>
-          <button
-            class="favorite ${isFavorite(prompt.id) ? 'favorite-on' : ''}"
-            data-favorite="${prompt.id}"
-            aria-label="Toggle favorite"
-            type="button"
-          >
-            ${isFavorite(prompt.id) ? '★' : '☆'}
-          </button>
-        </div>
-
-        <div class="prompt-meta">
-          <span class="metric">Quality <strong>${prompt.quality_score}/20</strong></span>
-          <span class="metric">Viral <strong>${prompt.viral_score}/20</strong></span>
-          <span class="metric">Best <strong>${PVUI.escapeHtml(prompt.best_model)}</strong></span>
-        </div>
-
-        <div class="boundary">
-          <span class="meta-label">Use when</span>
-          <p>${PVUI.escapeHtml(prompt.use_when)}</p>
-        </div>
-
-        <div class="boundary warning">
-          <span class="meta-label">Do not use when</span>
-          <p>${PVUI.escapeHtml(prompt.do_not_use_when)}</p>
-        </div>
-
-        <div class="boundary">
-          <span class="meta-label">Proof note</span>
-          <p>${PVUI.escapeHtml(prompt.proof_note)}</p>
-        </div>
-
-        <div class="variant-tabs">
-          ${['Universal', 'Claude', 'Copilot', 'Gemini'].map(variant => `
-            <button
-              class="variant-tab ${(PVState.activeVariants[prompt.id] || 'Universal') === variant ? 'active' : ''}"
-              data-variant="${prompt.id}"
-              data-variant-name="${variant}"
-              type="button"
-            >
-              ${variant}
-            </button>
-          `).join('')}
-        </div>
-
-        <pre class="code">${PVUI.escapeHtml(activeVariantText(prompt))}</pre>
-
-        <div class="card-actions">
-          <button class="button button-primary" data-copy="${prompt.id}" type="button">Copy prompt</button>
-          <button class="button button-secondary" data-details="${prompt.id}" type="button">Compare / details</button>
-          <button class="button button-secondary" data-kit="${prompt.id}" type="button">Save to kit</button>
-        </div>
-      </article>
-    `).join('');
-
-    document.querySelectorAll('[data-favorite]').forEach(btn => {
-      btn.addEventListener('click', () => toggleFavorite(btn.dataset.favorite));
-    });
-
-    document.querySelectorAll('[data-variant]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        PVState.activeVariants[btn.dataset.variant] = btn.dataset.variantName;
-        renderPrompts();
-      });
-    });
-
-    document.querySelectorAll('[data-copy]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const prompt = getPromptById(btn.dataset.copy);
-        await PVUI.copy(activeVariantText(prompt));
-        trackCopy(prompt.title);
-        const old = btn.textContent;
-        btn.textContent = 'Copied ✓';
-        setTimeout(() => btn.textContent = old, 900);
-      });
-    });
-
-    document.querySelectorAll('[data-details]').forEach(btn => {
-      btn.addEventListener('click', () => openDetail(btn.dataset.details));
-    });
-
-    document.querySelectorAll('[data-kit]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const prompt = getPromptById(btn.dataset.kit);
-        addToKit({ type: 'prompt', id: prompt.id, title: prompt.title, text: activeVariantText(prompt) });
+    collectionGrid: PVUI.byId });    collectionGrid: PVUI.byId('collectionGrid'),
       });
     });
 
@@ -279,11 +32,16 @@
     els.recentList.innerHTML = PVState.recent.map(id => {
       const prompt = getPromptById(id);
       if (!prompt) return '';
-      return `<button class="kit-item" data-open-recent="${prompt.id}" type="button">${PVUI.escapeHtml(prompt.title)}</button>`;
+
+      return `
+        <button class="kit-item" data-open-recent="${prompt.id}" type="button">
+          ${PVUI.escapeHtml(prompt.title)}
+        </button>
+      `;
     }).join('');
 
-    document.querySelectorAll('[data-open-recent]').forEach(btn => {
-      btn.addEventListener('click', () => openDetail(btn.dataset.openRecent));
+    document.querySelectorAll('[data-open-recent]').forEach(button => {
+      button.addEventListener('click', () => openDetail(button.dataset.openRecent));
     });
   }
 
@@ -334,7 +92,9 @@
 
       <div class="detail-section detail-box">
         <h3>Why it got better</h3>
-        <ul class="list">${prompt.compare.why_better.map(item => `<li>${PVUI.escapeHtml(item)}</li>`).join('')}</ul>
+        <ul class="list">
+          ${prompt.compare.why_better.map(item => `<li>${PVUI.escapeHtml(item)}</li>`).join('')}
+        </ul>
       </div>
 
       <div class="detail-grid detail-section">
@@ -386,10 +146,10 @@
     els.detailDialog.showModal();
     updateUrl({ prompt: prompt.id });
 
-    document.querySelectorAll('[data-detail-variant]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        PVState.activeVariants[btn.dataset.detailVariant] = btn.dataset.detailVariantName;
-        openDetail(btn.dataset.detailVariant);
+    document.querySelectorAll('[data-detail-variant]').forEach(button => {
+      button.addEventListener('click', () => {
+        PVState.activeVariants[button.dataset.detailVariant] = button.dataset.detailVariantName;
+        openDetail(button.dataset.detailVariant);
       });
     });
   }
@@ -467,6 +227,7 @@
 
   function renderGeneratedPackage() {
     const pkg = PVState.generatedPackage;
+
     if (!pkg) {
       launcherEls.generatedPromptOutput.textContent = '';
       launcherEls.generatedModelFit.textContent = '—';
@@ -484,17 +245,21 @@
       pkg.default;
 
     launcherEls.generatedPromptOutput.textContent = text;
-    launcherEls.generatedChanges.innerHTML = pkg.changes.map(item => `<li>${PVUI.escapeHtml(item)}</li>`).join('');
+    launcherEls.generatedChanges.innerHTML = pkg.changes
+      .map(item => `<li>${PVUI.escapeHtml(item)}</li>`)
+      .join('');
     launcherEls.generatedWhyItWorks.textContent = pkg.whyItWorks;
   }
 
   function bindLauncher() {
-    document.querySelectorAll('.output-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        PVState.generatedTab = btn.dataset.outputTab;
-        document.querySelectorAll('.output-tab').forEach(x => {
-          x.classList.toggle('active', x.dataset.outputTab === PVState.generatedTab);
+    document.querySelectorAll('.output-tab').forEach(button => {
+      button.addEventListener('click', () => {
+        PVState.generatedTab = button.dataset.outputTab;
+
+        document.querySelectorAll('.output-tab').forEach(tab => {
+          tab.classList.toggle('active', tab.dataset.outputTab === PVState.generatedTab);
         });
+
         renderGeneratedPackage();
       });
     });
@@ -502,13 +267,14 @@
     launcherEls.generatePackageButton.addEventListener('click', () => {
       const rawIdea = launcherEls.rawIdeaInput.value.trim();
       const taskType = launcherEls.taskTypeSelect.value;
+
       if (!rawIdea) return;
 
       PVState.generatedPackage = buildPromptPackage(taskType, rawIdea);
       PVState.generatedTab = 'default';
 
-      document.querySelectorAll('.output-tab').forEach(x => {
-        x.classList.toggle('active', x.dataset.outputTab === 'default');
+      document.querySelectorAll('.output-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.outputTab === 'default');
       });
 
       renderGeneratedPackage();
@@ -544,15 +310,15 @@
     updateUrl({ prompt: null });
   });
 
-  window.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && els.detailDialog.open) {
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && els.detailDialog.open) {
       els.detailDialog.close();
       updateUrl({ prompt: null });
     }
   });
 
-  [els.searchInput, els.categorySelect, els.modelSelect].forEach(el => {
-    el.addEventListener('input', () => {
+  [els.searchInput, els.categorySelect, els.modelSelect].forEach(element => {
+    element.addEventListener('input', () => {
       renderPrompts();
       updateUrl();
     });
@@ -561,6 +327,7 @@
   els.copyViewButton.addEventListener('click', async () => {
     updateUrl();
     await PVUI.copy(location.href);
+
     const old = els.copyViewButton.textContent;
     els.copyViewButton.textContent = 'View link copied ✓';
     setTimeout(() => els.copyViewButton.textContent = old, 900);
@@ -569,6 +336,7 @@
   els.copyBuilderButton.addEventListener('click', async () => {
     await PVUI.copy(PVUI.byId('builderOutput').textContent);
     trackCopy('Image builder prompt');
+
     const old = els.copyBuilderButton.textContent;
     els.copyBuilderButton.textContent = 'Copied ✓';
     setTimeout(() => els.copyBuilderButton.textContent = old, 900);
@@ -583,14 +351,14 @@
     });
   });
 
-  els.styleToggles.addEventListener('click', e => {
-    const chip = e.target.closest('[data-style]');
+  els.styleToggles.addEventListener('click', event => {
+    const chip = event.target.closest('[data-style]');
     if (!chip) return;
 
     PVState.activeStyle = chip.dataset.style;
 
-    document.querySelectorAll('#styleToggles .chip').forEach(x => {
-      x.classList.toggle('chip-active', x.dataset.style === PVState.activeStyle);
+    document.querySelectorAll('#styleToggles .chip').forEach(item => {
+      item.classList.toggle('chip-active', item.dataset.style === PVState.activeStyle);
     });
 
     PVLab.build();
@@ -620,3 +388,284 @@
   renderPrompts();
   bindLauncher();
 })();
+    promptGrid: PVUI.byId('promptGrid'),
+
+    searchInput: PVUI.byId('searchInput'),
+    categorySelect: PVUI.byId('categorySelect'),
+    modelSelect: PVUI.byId('modelSelect'),
+    copyViewButton: PVUI.byId('copyViewButton'),
+
+    detailDialog: PVUI.byId('detailDialog'),
+    detailContent: PVUI.byId('detailContent'),
+    closeDialogButton: PVUI.byId('closeDialogButton'),
+
+    kitList: PVUI.byId('kitList'),
+    recentList: PVUI.byId('recentList'),
+    copiedList: PVUI.byId('copiedList'),
+
+    copyBuilderButton: PVUI.byId('copyBuilderButton'),
+    saveBuilderButton: PVUI.byId('saveBuilderButton'),
+    styleToggles: PVUI.byId('styleToggles')
+  };
+
+  const launcherEls = {
+    rawIdeaInput: PVUI.byId('rawIdeaInput'),
+    taskTypeSelect: PVUI.byId('taskTypeSelect'),
+    generatePackageButton: PVUI.byId('generatePackageButton'),
+    clearPackageButton: PVUI.byId('clearPackageButton'),
+
+    generatedPromptOutput: PVUI.byId('generatedPromptOutput'),
+    generatedModelFit: PVUI.byId('generatedModelFit'),
+    generatedChanges: PVUI.byId('generatedChanges'),
+    generatedWhyItWorks: PVUI.byId('generatedWhyItWorks'),
+
+    copyGeneratedButton: PVUI.byId('copyGeneratedButton'),
+    copyForChatGPTButton: PVUI.byId('copyForChatGPTButton'),
+    copyForCopilotButton: PVUI.byId('copyForCopilotButton')
+  };
+
+  function persistAll() {
+    PVStorage.save('pv5-favorites', PVState.favorites);
+    PVStorage.save('pv5-kit', PVState.kit);
+    PVStorage.save('pv5-recent', PVState.recent);
+    PVStorage.save('pv5-copied', PVState.copied);
+  }
+
+  function isFavorite(id) {
+    return PVState.favorites.includes(id);
+  }
+
+  function toggleFavorite(id) {
+    PVState.favorites = isFavorite(id)
+      ? PVState.favorites.filter(item => item !== id)
+      : [...PVState.favorites, id];
+
+    persistAll();
+    renderPrompts();
+  }
+
+  function addToKit(item) {
+    const key = `${item.type}:${item.id}`;
+    PVState.kit = [
+      item,
+      ...PVState.kit.filter(existing => `${existing.type}:${existing.id}` !== key)
+    ].slice(0, 12);
+
+    persistAll();
+    renderKit();
+  }
+
+  function trackRecent(id) {
+    PVState.recent = [id, ...PVState.recent.filter(item => item !== id)].slice(0, 8);
+    persistAll();
+    renderRecent();
+  }
+
+  function trackCopy(title) {
+    PVState.copied = [title, ...PVState.copied.filter(item => item !== title)].slice(0, 8);
+    persistAll();
+    renderCopied();
+  }
+
+  function getPromptById(id) {
+    return PVState.prompts.find(prompt => prompt.id === id);
+  }
+
+  function activeVariantText(prompt) {
+    const variant = PVState.activeVariants[prompt.id] || 'Universal';
+    return prompt.variants[variant] || prompt.variants.Universal;
+  }
+
+  function applyUrlState() {
+    const params = new URLSearchParams(location.search);
+
+    const q = params.get('q');
+    const category = params.get('category');
+    const model = params.get('model');
+
+    if (q) els.searchInput.value = q;
+    if (category) els.categorySelect.value = category;
+    if (model) els.modelSelect.value = model;
+  }
+
+  function updateUrl(extra = {}) {
+    history.replaceState({}, '', PVUI.viewUrl(extra));
+  }
+
+  function renderCollections() {
+    els.collectionGrid.innerHTML = PVState.collections.map(collection => `
+      <article class="collection-card collection-clickable" data-collection="${collection.id}">
+        <p class="section-kicker">Pack</p>
+        <h3>${PVUI.escapeHtml(collection.title)}</h3>
+        <p>${PVUI.escapeHtml(collection.description)}</p>
+        <div class="collection-list">
+          ${collection.items.map(item => `<span class="tag">${PVUI.escapeHtml(item)}</span>`).join('')}
+        </div>
+        <p><strong>Why it matters:</strong> ${PVUI.escapeHtml(collection.why_it_matters)}</p>
+      </article>
+    `).join('');
+
+    document.querySelectorAll('[data-collection]').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.dataset.collection;
+
+        if (id === 'viral-image-pack') {
+          els.categorySelect.value = 'image';
+        }
+
+        if (id === 'operator-pack') {
+          els.categorySelect.value = 'work';
+        }
+
+        if (id === 'thinking-pack') {
+          els.categorySelect.value = 'thinking';
+        }
+
+        renderPrompts();
+        document.querySelector('.prompt-section')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  }
+
+  function getFilteredPrompts() {
+    const q = els.searchInput.value.trim().toLowerCase();
+    const category = els.categorySelect.value;
+    const model = els.modelSelect.value;
+
+    return PVState.prompts.filter(prompt => {
+      const haystack = [
+        prompt.title,
+        prompt.summary,
+        prompt.use_when,
+        prompt.do_not_use_when,
+        prompt.common_failure,
+        prompt.quick_patch,
+        prompt.category
+      ].join(' ').toLowerCase();
+
+      const searchOk = !q || haystack.includes(q);
+      const categoryOk = category === 'all' || prompt.category === category;
+      const modelOk = model === 'all' || prompt.best_model === model || Object.keys(prompt.variants).includes(model);
+
+      return searchOk && categoryOk && modelOk;
+    });
+  }
+
+  function renderPrompts() {
+    const prompts = getFilteredPrompts();
+
+    if (!prompts.length) {
+      els.promptGrid.innerHTML = PVUI.renderEmpty('No flagship prompts match the current filters.');
+      return;
+    }
+
+    els.promptGrid.innerHTML = prompts.map(prompt => `
+      <article class="prompt-card prompt-clickable" data-open-card="${prompt.id}">
+        <div class="prompt-head">
+          <div>
+            <h3 class="prompt-title">${PVUI.escapeHtml(prompt.title)}</h3>
+            <p class="prompt-summary">${PVUI.escapeHtml(prompt.summary)}</p>
+          </div>
+
+          <button
+            class="favorite ${isFavorite(prompt.id) ? 'favorite-on' : ''}"
+            data-favorite="${prompt.id}"
+            aria-label="Toggle favorite"
+            type="button"
+          >
+            ${isFavorite(prompt.id) ? '★' : '☆'}
+          </button>
+        </div>
+
+        <div class="prompt-meta">
+          <span class="metric">Quality <strong>${prompt.quality_score}/20</strong></span>
+          <span class="metric">Viral <strong>${prompt.viral_score}/20</strong></span>
+          <span class="metric">Best <strong>${PVUI.escapeHtml(prompt.best_model)}</strong></span>
+        </div>
+
+        <div class="boundary">
+          <span class="meta-label">Use when</span>
+          <p>${PVUI.escapeHtml(prompt.use_when)}</p>
+        </div>
+
+        <div class="boundary warning">
+          <span class="meta-label">Do not use when</span>
+          <p>${PVUI.escapeHtml(prompt.do_not_use_when)}</p>
+        </div>
+
+        <div class="boundary">
+          <span class="meta-label">Proof note</span>
+          <p>${PVUI.escapeHtml(prompt.proof_note)}</p>
+        </div>
+
+        <div class="variant-tabs">
+          ${['Universal', 'Claude', 'Copilot', 'Gemini'].map(variant => `
+            <button
+              class="variant-tab ${(PVState.activeVariants[prompt.id] || 'Universal') === variant ? 'active' : ''}"
+              data-variant="${prompt.id}"
+              data-variant-name="${variant}"
+              type="button"
+            >
+              ${variant}
+            </button>
+          `).join('')}
+        </div>
+
+        <pre class="code">${PVUI.escapeHtml(activeVariantText(prompt))}</pre>
+
+        <div class="card-actions">
+          <button class="button button-primary" data-copy="${prompt.id}" type="button">Copy prompt</button>
+          <button class="button button-secondary" data-details="${prompt.id}" type="button">Compare / details</button>
+          <button class="button button-secondary" data-kit="${prompt.id}" type="button">Save to kit</button>
+        </div>
+      </article>
+    `).join('');
+
+    document.querySelectorAll('[data-favorite]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+        toggleFavorite(button.dataset.favorite);
+      });
+    });
+
+    document.querySelectorAll('[data-variant]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+        PVState.activeVariants[button.dataset.variant] = button.dataset.variantName;
+        renderPrompts();
+      });
+    });
+
+    document.querySelectorAll('[data-copy]').forEach(button => {
+      button.addEventListener('click', async event => {
+        event.stopPropagation();
+
+        const prompt = getPromptById(button.dataset.copy);
+        await PVUI.copy(activeVariantText(prompt));
+
+        trackCopy(prompt.title);
+
+        const old = button.textContent;
+        button.textContent = 'Copied ✓';
+        setTimeout(() => button.textContent = old, 900);
+      });
+    });
+
+    document.querySelectorAll('[data-details]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+        openDetail(button.dataset.details);
+      });
+    });
+
+    document.querySelectorAll('[data-kit]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+
+        const prompt = getPromptById(button.dataset.kit);
+
+        addToKit({
+          type: 'prompt',
+          id: prompt.id,
+          title: prompt.title,
+          text: activeVariantText(prompt)
